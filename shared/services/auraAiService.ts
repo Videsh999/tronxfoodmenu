@@ -34,7 +34,7 @@ export async function requestAskAura(
   const trimmed = query.trim();
   if (!trimmed) {
     return {
-      message: 'How may I assist your dining selection at Aura today?',
+      message: 'How may I assist your dining selection at Tronx today?',
       dishes: [],
       isFallback: false,
     };

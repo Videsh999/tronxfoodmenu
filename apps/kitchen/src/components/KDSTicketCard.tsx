@@ -55,21 +55,21 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
         return {
           nextStatus: 'PREPARING' as OrderStatus,
           label: 'Start Preparing',
-          bgClass: 'bg-[#31543A] hover:bg-[#26432E] text-white font-bold shadow-sm',
+          bgClass: 'bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold shadow-sm',
           icon: ChefHat,
         };
       case 'PREPARING':
         return {
           nextStatus: 'READY' as OrderStatus,
           label: 'Mark Ready',
-          bgClass: 'bg-[#31543A] hover:bg-[#26432E] text-white font-bold shadow-sm',
+          bgClass: 'bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold shadow-sm',
           icon: Bell,
         };
       case 'READY':
         return {
           nextStatus: 'COMPLETED' as OrderStatus,
           label: 'Complete Order',
-          bgClass: 'bg-[#182019] hover:bg-[#26432E] text-white font-bold shadow-sm',
+          bgClass: 'bg-[#241416] hover:bg-[#4D2326] text-[#FFF5EC] font-bold shadow-sm',
           icon: CheckCircle2,
         };
       default:
@@ -110,15 +110,15 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
           ? 'border-red-500 bg-red-50/90 ring-2 ring-red-400/50 shadow-md'
           : urgencyLevel === 'warning'
           ? 'border-amber-400 bg-amber-50/90 ring-1 ring-amber-300 shadow-sm'
-          : 'border-[#DDD9CB] bg-white'
+          : 'border-[#E8D9CC] bg-white'
       }`}
     >
       {/* Ticket Header */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between border-b border-[#DDD9CB] pb-2.5">
+        <div className="flex items-center justify-between border-b border-[#E8D9CC] pb-2.5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-lg font-extrabold text-[#31543A] block">
+              <span className="font-mono text-lg font-extrabold text-[#602E31] block">
                 {order.orderNumber}
               </span>
               {elapsedSeconds < 120 && (
@@ -133,7 +133,7 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
                 </motion.span>
               )}
             </div>
-            <span className="text-xs text-[#626F64] font-mono font-medium">
+            <span className="text-xs text-[#7E6568] font-mono font-medium">
               {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           </div>
@@ -145,7 +145,7 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
                 ? 'bg-red-100 border border-red-400 text-red-900 ring-2 ring-red-300 font-bold animate-pulse'
                 : urgencyLevel === 'warning'
                 ? 'bg-amber-100 border border-amber-400 text-amber-900 font-bold'
-                : 'bg-[#FAF8F3] border border-[#DDD9CB] text-[#31543A] font-bold'
+                : 'bg-[#FAF2EA] border border-[#E8D9CC] text-[#602E31] font-bold'
             }`}
           >
             <Clock className="w-3.5 h-3.5" />
@@ -154,14 +154,14 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
         </div>
 
         {/* Preparation Target Visual Progress Bar */}
-        <div className="w-full bg-[#DDD9CB]/40 h-1.5 rounded-full overflow-hidden">
+        <div className="w-full bg-[#E8D9CC]/50 h-1.5 rounded-full overflow-hidden">
           <motion.div
             className={`h-full rounded-full transition-all ${
               urgencyLevel === 'urgent'
                 ? 'bg-red-500'
                 : urgencyLevel === 'warning'
                 ? 'bg-amber-500'
-                : 'bg-[#31543A]'
+                : 'bg-[#602E31]'
             }`}
             style={{ width: `${prepProgressPercent}%` }}
             transition={{ duration: 0.5 }}
@@ -172,7 +172,7 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
         <div className="flex items-center justify-between text-xs pt-1">
           <div className="flex items-center gap-1.5">
             {order.orderType === 'DINE_IN' && (
-              <span className="inline-flex items-center gap-1 bg-[#FAF8F3] border border-[#DDD9CB] text-[#31543A] px-2.5 py-1 rounded-full font-bold text-xs">
+              <span className="inline-flex items-center gap-1 bg-[#FAF2EA] border border-[#E8D9CC] text-[#602E31] px-2.5 py-1 rounded-full font-bold text-xs">
                 <Utensils className="w-3 h-3" /> Dine-In
               </span>
             )}
@@ -189,7 +189,7 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
           </div>
 
           {order.tableNumber && (
-            <span className="font-mono font-bold text-[#31543A] bg-[#FAF8F3] border border-[#DDD9CB] px-2.5 py-1 rounded-lg text-xs tracking-wider shadow-xs">
+            <span className="font-mono font-bold text-[#602E31] bg-[#FAF2EA] border border-[#E8D9CC] px-2.5 py-1 rounded-lg text-xs tracking-wider shadow-xs">
               {order.tableNumber.startsWith('Table') ? order.tableNumber : `Table ${order.tableNumber}`}
             </span>
           )}
@@ -209,23 +209,23 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
       )}
 
       {/* Item List */}
-      <div className="space-y-3 py-2 border-t border-b border-[#DDD9CB] my-1 max-h-56 overflow-y-auto">
+      <div className="space-y-3 py-2 border-t border-b border-[#E8D9CC] my-1 max-h-56 overflow-y-auto">
         {order.items.map((item) => (
           <div key={item.id} className="text-xs space-y-1">
             <div className="flex items-start justify-between font-bold">
               <span className="flex items-center gap-2">
-                <span className="text-[#31543A] font-mono text-sm bg-[#FAF8F3] border border-[#DDD9CB] px-2 py-0.5 rounded font-bold">
+                <span className="text-[#602E31] font-mono text-sm bg-[#FAF2EA] border border-[#E8D9CC] px-2 py-0.5 rounded font-bold">
                   {item.quantity}×
                 </span>
-                <span className="text-sm font-serif font-bold text-[#182019]">{item.dishName}</span>
+                <span className="text-sm font-serif font-bold text-[#241416]">{item.dishName}</span>
               </span>
             </div>
 
             {/* Modifiers List */}
             {item.selectedModifiers.length > 0 && (
-              <div className="pl-7 space-y-0.5 text-[11px] text-[#626F64] font-mono">
+              <div className="pl-7 space-y-0.5 text-[11px] text-[#7E6568] font-mono">
                 {item.selectedModifiers.map((m, idx) => (
-                  <span key={idx} className="block font-medium"><strong className="text-[#31543A]">•</strong> {m.optionName}</span>
+                  <span key={idx} className="block font-medium"><strong className="text-[#602E31]">•</strong> {m.optionName}</span>
                 ))}
               </div>
             )}
@@ -235,9 +235,9 @@ export const KDSTicketCard: React.FC<KDSTicketCardProps> = ({ order, onUpdateSta
 
       {/* Special Instructions Notes */}
       {order.specialInstructions && (
-        <div className="bg-[#FAF8F3] border border-[#DDD9CB] p-2.5 rounded-xl text-xs space-y-1">
-          <span className="text-[10px] text-[#31543A] uppercase tracking-wider block font-bold">Special Instructions</span>
-          <p className="text-[#182019] italic font-serif">{order.specialInstructions}</p>
+        <div className="bg-[#FAF2EA] border border-[#E8D9CC] p-2.5 rounded-xl text-xs space-y-1">
+          <span className="text-[10px] text-[#602E31] uppercase tracking-wider block font-bold">Special Instructions</span>
+          <p className="text-[#241416] italic font-serif">{order.specialInstructions}</p>
         </div>
       )}
 

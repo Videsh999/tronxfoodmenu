@@ -95,7 +95,7 @@ export const OrderStatusPage: React.FC = () => {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center space-y-4">
-        <MetaTags title="Tracking Order... | Aura" />
+        <MetaTags title="Tracking Order... | Tronx" />
         <LoadingSpinner label="Retrieving culinary ticket from concierge registry..." />
       </div>
     );
@@ -103,16 +103,16 @@ export const OrderStatusPage: React.FC = () => {
 
   if (errorMsg || !order) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-16 text-center space-y-6 text-[#182019]">
-        <MetaTags title="Order Not Found | Aura" />
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center space-y-6 text-[#241416]">
+        <MetaTags title="Order Not Found | Tronx" />
         <div className="w-16 h-16 rounded-2xl bg-[#A8382B]/10 border border-[#A8382B]/20 text-[#A8382B] flex items-center justify-center mx-auto">
           <AlertCircle className="w-8 h-8" />
         </div>
-        <h2 className="font-serif text-3xl font-bold text-[#182019]">Ticket Not Found</h2>
-        <p className="text-[#626F64] text-sm max-w-md mx-auto">{errorMsg || 'Unable to locate order ticket.'}</p>
+        <h2 className="font-serif text-3xl font-bold text-[#241416]">Ticket Not Found</h2>
+        <p className="text-[#7E6568] text-sm max-w-md mx-auto">{errorMsg || 'Unable to locate order ticket.'}</p>
         <Link
           to="/menu"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold text-xs uppercase tracking-widest shadow-xs border border-[#26432E] transition-all min-h-[44px]"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold text-xs uppercase tracking-widest shadow-xs border border-[#4D2326] transition-all min-h-[44px]"
         >
           Return to Menu
         </Link>
@@ -121,8 +121,8 @@ export const OrderStatusPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 space-y-8 text-[#182019]">
-      <MetaTags title={`Order ${order.orderNumber} Status | Aura`} />
+    <div className="max-w-4xl mx-auto px-4 py-10 space-y-8 text-[#241416]">
+      <MetaTags title={`Order ${order.orderNumber} Status | Tronx`} />
 
       {/* Realtime Status Advancement Notification Toast */}
       <AnimatePresence>
@@ -132,14 +132,14 @@ export const OrderStatusPage: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -16, scale: 0.96 }}
             transition={{ duration: 0.25 }}
-            className="p-4 rounded-2xl bg-[#31543A] text-white shadow-md border border-[#26432E] flex items-center justify-between gap-3"
+            className="p-4 rounded-2xl bg-[#602E31] text-white shadow-md border border-[#4D2326] flex items-center justify-between gap-3"
           >
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#78956A] block">Live Status Update</span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E8D9CC] block">Live Status Update</span>
                 <p className="text-xs sm:text-sm font-semibold">{statusToast.message}</p>
               </div>
             </div>
@@ -155,47 +155,47 @@ export const OrderStatusPage: React.FC = () => {
 
       {/* Header */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#31543A]/10 border border-[#31543A]/30 text-[#31543A] text-xs font-mono font-bold">
-          <Clock className="w-3.5 h-3.5 animate-pulse text-[#31543A]" /> Live Order Tracking
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#602E31]/10 border border-[#602E31]/30 text-[#602E31] text-xs font-mono font-bold">
+          <Clock className="w-3.5 h-3.5 animate-pulse text-[#602E31]" /> Live Order Tracking
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#182019]">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#241416]">
           Ticket {order.orderNumber}
         </h1>
-        <p className="text-[#626F64] text-xs sm:text-sm">
-          Placed on {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • Mode: <span className="text-[#31543A] font-bold">{order.orderType}</span>
+        <p className="text-[#7E6568] text-xs sm:text-sm">
+          Placed on {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • Mode: <span className="text-[#602E31] font-bold">{order.orderType}</span>
         </p>
       </div>
 
       {/* Animated Order Timeline */}
-      <div className="bg-white border border-[#DDD9CB] p-6 sm:p-8 rounded-2xl space-y-8 shadow-xs">
+      <div className="bg-white border border-[#E8D9CC] p-6 sm:p-8 rounded-2xl space-y-8 shadow-xs">
         <OrderTimeline orderStatus={order.orderStatus} orderType={order.orderType} />
       </div>
 
       {/* Ticket Details & Items Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Ordered Dishes List */}
-        <div className="md:col-span-2 bg-white border border-[#DDD9CB] p-6 rounded-2xl space-y-4 shadow-xs">
-          <h3 className="font-serif text-xl font-bold text-[#182019] border-b border-[#DDD9CB] pb-3 flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-[#31543A]" /> Prepared Items
+        <div className="md:col-span-2 bg-white border border-[#E8D9CC] p-6 rounded-2xl space-y-4 shadow-xs">
+          <h3 className="font-serif text-xl font-bold text-[#241416] border-b border-[#E8D9CC] pb-3 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-[#602E31]" /> Prepared Items
           </h3>
 
           <div className="space-y-3">
             {order.items.map((item) => (
-              <div key={item.id} className="bg-[#FAF8F3] border border-[#DDD9CB] p-4 rounded-xl flex items-center justify-between gap-4">
+              <div key={item.id} className="bg-[#FAF2EA] border border-[#E8D9CC] p-4 rounded-xl flex items-center justify-between gap-4">
                 <div>
-                  <h4 className="font-serif font-bold text-[#182019] text-sm">{item.dishName}</h4>
-                  <p className="text-xs text-[#31543A] font-mono font-bold">
+                  <h4 className="font-serif font-bold text-[#241416] text-sm">{item.dishName}</h4>
+                  <p className="text-xs text-[#602E31] font-mono font-bold">
                     {RESTAURANT_BRAND.currencySymbol}{item.unitPrice.toFixed(2)} × {item.quantity}
                   </p>
                   {item.selectedModifiers.length > 0 && (
-                    <div className="text-[11px] text-[#626F64] mt-1">
+                    <div className="text-[11px] text-[#7E6568] mt-1">
                       {item.selectedModifiers.map((m, idx) => (
                         <span key={idx} className="block">• {m.optionName} {m.price > 0 && `(+${RESTAURANT_BRAND.currencySymbol}${m.price.toFixed(2)})`}</span>
                       ))}
                     </div>
                   )}
                 </div>
-                <span className="font-mono text-sm font-bold text-[#182019]">
+                <span className="font-mono text-sm font-bold text-[#241416]">
                   {RESTAURANT_BRAND.currencySymbol}{item.itemSubtotal.toFixed(2)}
                 </span>
               </div>
@@ -212,47 +212,47 @@ export const OrderStatusPage: React.FC = () => {
             </div>
           )}
 
-          <div className="bg-white border border-[#DDD9CB] p-6 rounded-2xl space-y-4 text-xs shadow-xs">
-            <h4 className="font-serif text-lg font-bold text-[#182019] border-b border-[#DDD9CB] pb-2">
+          <div className="bg-white border border-[#E8D9CC] p-6 rounded-2xl space-y-4 text-xs shadow-xs">
+            <h4 className="font-serif text-lg font-bold text-[#241416] border-b border-[#E8D9CC] pb-2">
               Ticket Overview
             </h4>
 
-            <div className="space-y-2 text-[#182019] font-mono">
+            <div className="space-y-2 text-[#241416] font-mono">
               <div className="flex justify-between">
-                <span className="text-[#626F64]">Payment Status:</span>
-                <span className={`font-bold ${order.paymentStatus === 'PAID' ? 'text-[#31543A]' : order.paymentStatus === 'FAILED' ? 'text-[#A8382B]' : 'text-[#C97852]'}`}>
+                <span className="text-[#7E6568]">Payment Status:</span>
+                <span className={`font-bold ${order.paymentStatus === 'PAID' ? 'text-[#602E31]' : order.paymentStatus === 'FAILED' ? 'text-[#A8382B]' : 'text-[#C97852]'}`}>
                   {order.paymentStatus}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#626F64]">Reference:</span>
-                <span className="text-[#182019] truncate max-w-[100px]">{order.paymentReference || 'N/A'}</span>
+                <span className="text-[#7E6568]">Reference:</span>
+                <span className="text-[#241416] truncate max-w-[100px]">{order.paymentReference || 'N/A'}</span>
               </div>
               {order.tableNumber && (
                 <div className="flex justify-between">
-                  <span className="text-[#626F64]">Table Number:</span>
-                  <span className="text-[#31543A] font-bold">{order.tableNumber}</span>
+                  <span className="text-[#7E6568]">Table Number:</span>
+                  <span className="text-[#602E31] font-bold">{order.tableNumber}</span>
                 </div>
               )}
               {order.deliveryAddress && (
                 <div className="space-y-1">
-                  <span className="text-[#626F64] block">Delivery Address:</span>
-                  <p className="text-[#182019] font-sans text-xs bg-[#FAF8F3] border border-[#DDD9CB] p-2 rounded-lg">{order.deliveryAddress}</p>
+                  <span className="text-[#7E6568] block">Delivery Address:</span>
+                  <p className="text-[#241416] font-sans text-xs bg-[#FAF2EA] border border-[#E8D9CC] p-2 rounded-lg">{order.deliveryAddress}</p>
                 </div>
               )}
             </div>
 
-            <div className="space-y-2 pt-3 border-t border-[#DDD9CB]">
-              <div className="flex justify-between text-[#626F64]"><span>Subtotal:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.subtotal.toFixed(2)}</span></div>
-              <div className="flex justify-between text-[#626F64]"><span>Tax:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.taxAmount.toFixed(2)}</span></div>
+            <div className="space-y-2 pt-3 border-t border-[#E8D9CC]">
+              <div className="flex justify-between text-[#7E6568]"><span>Subtotal:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.subtotal.toFixed(2)}</span></div>
+              <div className="flex justify-between text-[#7E6568]"><span>Tax:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.taxAmount.toFixed(2)}</span></div>
               {order.deliveryFee > 0 && (
-                <div className="flex justify-between text-[#626F64]"><span>Delivery Fee:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.deliveryFee.toFixed(2)}</span></div>
+                <div className="flex justify-between text-[#7E6568]"><span>Delivery Fee:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.deliveryFee.toFixed(2)}</span></div>
               )}
-              <div className="flex justify-between text-[#626F64]"><span>Gratuity:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.tipAmount.toFixed(2)}</span></div>
+              <div className="flex justify-between text-[#7E6568]"><span>Gratuity:</span><span>{RESTAURANT_BRAND.currencySymbol}{order.tipAmount.toFixed(2)}</span></div>
 
-              <div className="flex justify-between font-serif text-base font-bold text-[#182019] pt-2 border-t border-[#DDD9CB]">
+              <div className="flex justify-between font-serif text-base font-bold text-[#241416] pt-2 border-t border-[#E8D9CC]">
                 <span>Total Amount:</span>
-                <span className="text-[#31543A] font-mono font-bold text-lg">{RESTAURANT_BRAND.currencySymbol}{order.totalAmount.toFixed(2)}</span>
+                <span className="text-[#602E31] font-mono font-bold text-lg">{RESTAURANT_BRAND.currencySymbol}{order.totalAmount.toFixed(2)}</span>
               </div>
             </div>
 
@@ -269,7 +269,7 @@ export const OrderStatusPage: React.FC = () => {
                   }
                 }}
                 disabled={isPlacingOrder}
-                className="w-full mt-2 py-3.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] active:scale-[0.97] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs border border-[#26432E] transition-all disabled:opacity-50 min-h-[44px]"
+                className="w-full mt-2 py-3.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] active:scale-[0.97] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs border border-[#4D2326] transition-all disabled:opacity-50 min-h-[44px]"
               >
                 {isPlacingOrder ? (
                   <span className="flex items-center gap-2">
@@ -289,14 +289,14 @@ export const OrderStatusPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowInvoice(true)}
-            className="w-full py-3.5 rounded-xl border border-[#DDD9CB] bg-white hover:border-[#31543A] active:scale-[0.97] text-[#182019] hover:text-[#31543A] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-all min-h-[44px]"
+            className="w-full py-3.5 rounded-xl border border-[#E8D9CC] bg-white hover:border-[#602E31] active:scale-[0.97] text-[#241416] hover:text-[#602E31] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-all min-h-[44px]"
           >
-            <Receipt className="w-4 h-4 text-[#31543A]" /> View & Print Tax Invoice
+            <Receipt className="w-4 h-4 text-[#602E31]" /> View & Print Tax Invoice
           </button>
 
           <Link
             to="/menu"
-            className="w-full py-3.5 rounded-xl border border-[#DDD9CB] bg-[#FAF8F3] text-[#182019] hover:text-[#31543A] hover:border-[#31543A]/40 active:scale-[0.97] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-all min-h-[44px]"
+            className="w-full py-3.5 rounded-xl border border-[#E8D9CC] bg-[#FAF2EA] text-[#241416] hover:text-[#602E31] hover:border-[#602E31]/40 active:scale-[0.97] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-all min-h-[44px]"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Menu
           </Link>

@@ -10,7 +10,7 @@ import { ThemeProvider } from '@shared/context/ThemeContext';
 import { MusicProvider } from '@shared/context/MusicContext';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { RouteGuard } from '@shared/components/RouteGuard';
-import { CustomerCursor } from './components/CustomerCursor';
+import { TronxCursor } from '@shared/components/CraftslandCursor';
 
 // Customer Components
 import { Navbar } from './components/Navbar';
@@ -48,9 +48,9 @@ export const App: React.FC = () => {
             <OrderProvider>
               <ThemeProvider>
                 <MusicProvider>
-                  <CustomerCursor />
+                  <TronxCursor />
                   <Router>
-                    <div className="flex flex-col min-h-screen bg-[#FFEFE2] text-[#182019]">
+                    <div className="flex flex-col min-h-screen bg-[#FFF5EC] text-[#241416]">
                       <Navbar onOpenCart={() => setCartDrawerOpen(true)} />
                       <CartDrawer isOpen={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)} />
                       <AskAuraDrawer />

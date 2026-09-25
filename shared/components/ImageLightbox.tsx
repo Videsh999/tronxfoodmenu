@@ -77,7 +77,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
             <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/40">
               <img
                 src={imageUrl}
-                alt={title || 'Aura Media'}
+                alt={title || 'Tronx Media'}
                 className="max-h-[75vh] w-auto max-w-full object-contain rounded-2xl"
               />
             </div>
@@ -92,7 +92,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
                 className="text-center space-y-1"
               >
                 {category && (
-                  <span className="text-[10px] font-mono tracking-[0.25em] text-[#4ADE80] uppercase block font-semibold">
+                  <span className="text-[10px] font-mono tracking-[0.25em] text-[#E8B896] uppercase block font-semibold">
                     {category}
                   </span>
                 )}

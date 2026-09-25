@@ -141,7 +141,7 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
     try {
       const result = await MediaService.uploadVideoToCloudinary(selectedFile, {
         signal: abortController.signal,
-        folder: 'craftsland/dishes',
+        folder: 'tronx/dishes',
         onProgress: (progress: VideoUploadProgress) => {
           setUploadProgress(progress.percent);
           setUploadBytes({ loaded: progress.loaded, total: progress.total });
@@ -219,21 +219,21 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
   const isCloudinary = videoUrl.includes('cloudinary.com');
 
   return (
-    <div className="space-y-3 bg-[#FAF8F3] border border-[#DDD9CB] rounded-2xl p-4 text-[#182019]">
+    <div className="space-y-3 bg-[#FAF2EA] border border-[#E8D9CC] rounded-2xl p-4 text-[#241416]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Film className="w-4 h-4 text-[#31543A]" />
-          <span className="font-bold uppercase text-[11px] tracking-wider text-[#182019]">
+          <Film className="w-4 h-4 text-[#602E31]" />
+          <span className="font-bold uppercase text-[11px] tracking-wider text-[#241416]">
             Dish Video Asset
           </span>
           {videoUrl ? (
-            <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-[#602E31]/10 text-[#602E31] border border-[#602E31]/30 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#602E31] animate-pulse" />
               Active
             </span>
           ) : (
-            <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-[#DDD9CB]/50 text-[#626F64]">
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-[#E8D9CC]/50 text-[#7E6568]">
               Static Photo Mode
             </span>
           )}
@@ -244,7 +244,7 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
             type="button"
             onClick={removeVideo}
             disabled={disabled}
-            className="text-[10px] text-[#A8382B] font-bold uppercase hover:text-[#A8382B]/80 cursor-pointer flex items-center gap-1 transition-colors"
+            className="text-[10px] text-[#C2674F] font-bold uppercase hover:text-[#C2674F]/80 cursor-pointer flex items-center gap-1 transition-colors"
           >
             <Trash2 className="w-3 h-3" /> Remove Video
           </button>
@@ -253,16 +253,16 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
 
       {/* Upload Error Banner */}
       {uploadError && (
-        <div className="bg-[#A8382B]/10 border border-[#A8382B]/20 p-3 rounded-xl text-xs text-[#A8382B] flex items-start gap-2">
-          <AlertCircle className="w-4 h-4 text-[#A8382B] mt-0.5 shrink-0" />
+        <div className="bg-[#C2674F]/10 border border-[#C2674F]/20 p-3 rounded-xl text-xs text-[#C2674F] flex items-start gap-2">
+          <AlertCircle className="w-4 h-4 text-[#C2674F] mt-0.5 shrink-0" />
           <div className="flex-1 space-y-1">
             <p className="font-bold text-[11px]">Upload Issue</p>
-            <p className="text-[11px] leading-relaxed text-[#A8382B]">{uploadError}</p>
+            <p className="text-[11px] leading-relaxed text-[#C2674F]">{uploadError}</p>
           </div>
           <button
             type="button"
             onClick={() => setUploadError(null)}
-            className="text-[#A8382B] hover:opacity-75 p-0.5"
+            className="text-[#C2674F] hover:opacity-75 p-0.5"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -271,15 +271,15 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
 
       {/* Upload Success Banner */}
       {uploadSuccess && (
-        <div className="bg-[#FAF8F3] border border-[#31543A]/30 p-2.5 rounded-xl text-xs text-[#31543A] flex items-center justify-between">
+        <div className="bg-[#FAF2EA] border border-[#602E31]/30 p-2.5 rounded-xl text-xs text-[#602E31] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#31543A] shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-[#602E31] shrink-0" />
             <span className="text-[11px] font-medium">Video uploaded & optimized successfully via Cloudinary!</span>
           </div>
           <button
             type="button"
             onClick={() => setUploadSuccess(false)}
-            className="text-[#31543A] hover:opacity-75"
+            className="text-[#602E31] hover:opacity-75"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -289,7 +289,7 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
       {/* Active Video Player or Local Pre-upload Preview */}
       {activeVideoSrc ? (
         <div className="space-y-2">
-          <div className="relative rounded-xl overflow-hidden bg-black border border-[#DDD9CB] shadow-inner">
+          <div className="relative rounded-xl overflow-hidden bg-black border border-[#E8D9CC] shadow-inner">
             <video
               key={activeVideoSrc}
               src={activeVideoSrc}
@@ -300,7 +300,7 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
               className="w-full max-h-52 object-contain mx-auto"
             />
             {localPreviewUrl && (
-              <div className="absolute top-2 left-2 bg-amber-500/90 backdrop-blur-xs text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+              <div className="absolute top-2 left-2 bg-[#C2674F]/90 backdrop-blur-xs text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
                 Local File Preview (Pending Upload)
               </div>
             )}
@@ -308,10 +308,10 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
 
           {/* Local file action buttons */}
           {selectedFile && !isUploading && (
-            <div className="bg-white border border-[#DDD9CB] p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+            <div className="bg-white border border-[#E8D9CC] p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
               <div className="text-xs">
-                <p className="font-bold text-[#182019] truncate max-w-[260px]">{selectedFile.name}</p>
-                <p className="text-[10px] text-[#626F64]">
+                <p className="font-bold text-[#241416] truncate max-w-[260px]">{selectedFile.name}</p>
+                <p className="text-[10px] text-[#7E6568]">
                   {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
                   {localMetadata?.duration ? ` • ${localMetadata.duration}s` : ''}
                   {localMetadata?.width ? ` • ${localMetadata.width}×${localMetadata.height}` : ''}
@@ -326,14 +326,14 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
                     if (localPreviewUrl) URL.revokeObjectURL(localPreviewUrl);
                     setLocalPreviewUrl('');
                   }}
-                  className="px-3 py-1.5 rounded-lg border border-[#DDD9CB] text-[#626F64] hover:bg-[#FAF8F3] text-xs font-bold transition-colors cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg border border-[#E8D9CC] text-[#7E6568] hover:bg-[#FAF2EA] text-xs font-bold transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={startUpload}
-                  className="px-4 py-1.5 rounded-lg bg-[#31543A] hover:bg-[#26432E] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center gap-1.5"
+                  className="px-4 py-1.5 rounded-lg bg-[#602E31] hover:bg-[#4D2326] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center gap-1.5"
                 >
                   <UploadCloud className="w-3.5 h-3.5" /> Upload Now
                 </button>
@@ -343,22 +343,22 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
 
           {/* Cloudinary Metadata Summary */}
           {videoUrl && !selectedFile && !isUploading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px] font-mono text-[#626F64] bg-white p-2.5 rounded-xl border border-[#DDD9CB]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px] font-mono text-[#7E6568] bg-white p-2.5 rounded-xl border border-[#E8D9CC]">
               <div className="truncate">
-                <span className="text-[#626F64]/70">Provider:</span> {isCloudinary ? 'Cloudinary (Optimized)' : 'External CDN'}
+                <span className="text-[#7E6568]/70">Provider:</span> {isCloudinary ? 'Cloudinary (Optimized)' : 'External CDN'}
               </div>
               {videoPublicId && (
                 <div className="truncate">
-                  <span className="text-[#626F64]/70">Public ID:</span> {videoPublicId}
+                  <span className="text-[#7E6568]/70">Public ID:</span> {videoPublicId}
                 </div>
               )}
               {videoDuration ? (
                 <div>
-                  <span className="text-[#626F64]/70">Duration:</span> {videoDuration}s
+                  <span className="text-[#7E6568]/70">Duration:</span> {videoDuration}s
                 </div>
               ) : null}
               <div>
-                <span className="text-[#626F64]/70">Optimization:</span> q_auto, vc_auto, f_auto
+                <span className="text-[#7E6568]/70">Optimization:</span> q_auto, vc_auto, f_auto
               </div>
             </div>
           )}
@@ -367,30 +367,30 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
 
       {/* Uploading State: Progress Bar & Cancellation */}
       {isUploading && (
-        <div className="bg-white border border-[#DDD9CB] p-4 rounded-xl space-y-2 shadow-xs">
+        <div className="bg-white border border-[#E8D9CC] p-4 rounded-xl space-y-2 shadow-xs">
           <div className="flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 font-bold text-[#182019]">
-              <Loader2 className="w-4 h-4 animate-spin text-[#31543A]" />
+            <div className="flex items-center gap-2 font-bold text-[#241416]">
+              <Loader2 className="w-4 h-4 animate-spin text-[#602E31]" />
               <span>Uploading & Optimizing Video ({uploadProgress}%)</span>
             </div>
             <button
               type="button"
               onClick={cancelUpload}
-              className="text-[10px] text-[#A8382B] font-bold uppercase hover:text-[#A8382B]/80 cursor-pointer"
+              className="text-[10px] text-[#C2674F] font-bold uppercase hover:text-[#C2674F]/80 cursor-pointer"
             >
               Cancel
             </button>
           </div>
 
           {/* Animated Progress Bar */}
-          <div className="w-full bg-[#FAF8F3] rounded-full h-2.5 overflow-hidden border border-[#DDD9CB]">
+          <div className="w-full bg-[#FAF2EA] rounded-full h-2.5 overflow-hidden border border-[#E8D9CC]">
             <div
-              className="bg-[#31543A] h-full transition-all duration-200 rounded-full"
+              className="bg-[#602E31] h-full transition-all duration-200 rounded-full"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>
 
-          <div className="flex justify-between text-[10px] text-[#626F64] font-mono">
+          <div className="flex justify-between text-[10px] text-[#7E6568] font-mono">
             <span>
               {uploadBytes ? `${(uploadBytes.loaded / (1024 * 1024)).toFixed(1)} MB / ${(uploadBytes.total / (1024 * 1024)).toFixed(1)} MB` : 'Processing stream...'}
             </span>
@@ -408,8 +408,8 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
           onClick={() => fileInputRef.current?.click()}
           className={`border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
             isDragging
-              ? 'border-[#31543A] bg-[#FAF8F3] scale-[0.99]'
-              : 'border-[#DDD9CB] hover:border-[#31543A] bg-white hover:bg-[#FAF8F3]'
+              ? 'border-[#602E31] bg-[#FAF2EA] scale-[0.99]'
+              : 'border-[#E8D9CC] hover:border-[#602E31] bg-white hover:bg-[#FAF2EA]'
           }`}
         >
           <input
@@ -425,18 +425,18 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
           />
 
           <div className="flex flex-col items-center justify-center gap-1.5 pointer-events-none">
-            <div className="w-9 h-9 rounded-xl bg-[#FAF8F3] border border-[#DDD9CB] flex items-center justify-center text-[#31543A] shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-[#FAF2EA] border border-[#E8D9CC] flex items-center justify-center text-[#602E31] shadow-xs">
               <UploadCloud className="w-4 h-4" />
             </div>
             <div className="space-y-0.5">
-              <p className="text-xs font-bold text-[#182019]">
+              <p className="text-xs font-bold text-[#241416]">
                 {videoUrl ? `Upload Replacement Video for ${dishName}` : `Choose Local Video File for ${dishName}`}
               </p>
-              <p className="text-[10px] text-[#626F64]">
+              <p className="text-[10px] text-[#7E6568]">
                 Drag & drop MP4, WebM, or MOV here (Max 50 MB)
               </p>
             </div>
-            <span className="px-2.5 py-1 rounded-md bg-[#31543A] text-white text-[10px] font-bold uppercase tracking-wider shadow-xs mt-1">
+            <span className="px-2.5 py-1 rounded-md bg-[#602E31] hover:bg-[#4D2326] text-white text-[10px] font-bold uppercase tracking-wider shadow-xs mt-1">
               Select Video
             </span>
           </div>
@@ -444,11 +444,11 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
       )}
 
       {/* Manual URL Accordion (Optional Direct URL / Poster Config) */}
-      <div className="pt-2 border-t border-[#DDD9CB]">
+      <div className="pt-2 border-t border-[#E8D9CC]">
         <button
           type="button"
           onClick={() => setShowManualInputs(!showManualInputs)}
-          className="text-[10px] text-[#626F64] font-bold uppercase hover:text-[#182019] flex items-center gap-1 cursor-pointer"
+          className="text-[10px] text-[#7E6568] font-bold uppercase hover:text-[#241416] flex items-center gap-1 cursor-pointer"
         >
           <LinkIcon className="w-3 h-3" />
           {showManualInputs ? 'Hide Direct URL Inputs' : 'Direct URL / Custom Poster'}
@@ -457,29 +457,29 @@ export const AdminVideoUploader: React.FC<AdminVideoUploaderProps> = ({
         {showManualInputs && (
           <div className="space-y-2 pt-2 text-xs">
             <div className="space-y-1">
-              <label className="text-[10px] text-[#626F64] font-medium">Direct Video URL</label>
+              <label className="text-[10px] text-[#7E6568] font-medium">Direct Video URL</label>
               <input
                 type="url"
                 value={manualUrl}
                 onChange={(e) => setManualUrl(e.target.value)}
                 placeholder="https://res.cloudinary.com/.../video.mp4"
-                className="w-full bg-white border border-[#DDD9CB] rounded-lg px-2.5 py-1.5 text-xs text-[#182019] focus:outline-none focus:border-[#31543A]"
+                className="w-full bg-white border border-[#E8D9CC] rounded-lg px-2.5 py-1.5 text-xs text-[#241416] focus:outline-none focus:border-[#602E31]"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] text-[#626F64] font-medium">Custom Poster Frame URL</label>
+              <label className="text-[10px] text-[#7E6568] font-medium">Custom Poster Frame URL</label>
               <input
                 type="url"
                 value={manualPoster}
                 onChange={(e) => setManualPoster(e.target.value)}
                 placeholder="https://.../poster.jpg"
-                className="w-full bg-white border border-[#DDD9CB] rounded-lg px-2.5 py-1.5 text-xs text-[#182019] focus:outline-none focus:border-[#31543A]"
+                className="w-full bg-white border border-[#E8D9CC] rounded-lg px-2.5 py-1.5 text-xs text-[#241416] focus:outline-none focus:border-[#602E31]"
               />
             </div>
             <button
               type="button"
               onClick={applyManualOverride}
-              className="px-3 py-1 rounded-md bg-[#DDD9CB] hover:bg-[#DDD9CB]/70 text-[10px] font-bold uppercase text-[#182019] cursor-pointer"
+              className="px-3 py-1 rounded-md bg-[#E8D9CC] hover:bg-[#E8D9CC]/70 text-[10px] font-bold uppercase text-[#241416] cursor-pointer"
             >
               Apply Direct URLs
             </button>

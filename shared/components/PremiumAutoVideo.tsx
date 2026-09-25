@@ -178,13 +178,13 @@ export const PremiumAutoVideo: React.FC<PremiumAutoVideoProps> = ({
     <div
       ref={containerRef}
       onClick={onClick}
-      className={`relative overflow-hidden bg-[#FAF8F3] ${aspectRatio} ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`relative overflow-hidden bg-[#FAF2EA] ${aspectRatio} ${onClick ? 'cursor-pointer' : ''} ${className}`}
     >
       {/* Shimmer placeholder */}
       {!imgLoaded && (
-        <div className="absolute inset-0 bg-[#FAF8F3] animate-pulse flex items-center justify-center z-[1]">
-          <div className="w-8 h-8 rounded-full border border-[#DDD9CB] bg-white flex items-center justify-center opacity-60">
-            <span className="w-2 h-2 rounded-full bg-[#31543A]/50 animate-ping" />
+        <div className="absolute inset-0 bg-[#FAF2EA] animate-pulse flex items-center justify-center z-[1]">
+          <div className="w-8 h-8 rounded-full border border-[#E8D9CC] bg-white flex items-center justify-center opacity-60">
+            <span className="w-2 h-2 rounded-full bg-[#602E31]/50 animate-ping" />
           </div>
         </div>
       )}

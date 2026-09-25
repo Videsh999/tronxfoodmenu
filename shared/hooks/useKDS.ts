@@ -128,7 +128,7 @@ export const useKDS = () => {
           },
           {
             dishId: 'd5',
-            dishName: 'Craftsland Smoked Chocolate Sphere',
+            dishName: 'Tronx Smoked Chocolate Sphere',
             unitPrice: 28.00,
             quantity: 1,
             selectedModifiers: [],

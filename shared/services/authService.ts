@@ -4,10 +4,48 @@ import { supabase } from './supabaseClient';
 import type { Session } from '@supabase/supabase-js';
 
 // Development mock account store for offline local testing
+// Development mock account store for offline local testing
 const DEV_MOCK_ACCOUNTS: Record<string, UserProfile & { password: string }> = {
+  'customer@tronx.com': {
+    id: 'mock-cust-01',
+    email: 'customer@tronx.com',
+    fullName: 'Lady Genevieve Sterling',
+    phone: '+1 555-234-5678',
+    role: 'CUSTOMER',
+    createdAt: new Date().toISOString(),
+    password: 'password123',
+  },
+  'admin@tronx.com': {
+    id: 'mock-admin-01',
+    email: 'admin@tronx.com',
+    fullName: 'Director Julian Vance',
+    phone: '+1 555-876-5432',
+    role: 'ADMIN',
+    createdAt: new Date().toISOString(),
+    password: 'password123',
+  },
+  'kitchen@tronx.com': {
+    id: 'mock-kitch-01',
+    email: 'kitchen@tronx.com',
+    fullName: 'Chef de Cuisine Marcus Reid',
+    phone: '+1 555-345-6789',
+    role: 'KITCHEN',
+    createdAt: new Date().toISOString(),
+    password: 'password123',
+  },
+  'superadmin@tronx.com': {
+    id: 'mock-super-01',
+    email: 'superadmin@tronx.com',
+    fullName: 'Grand Maitre Dominique',
+    phone: '+1 555-999-8888',
+    role: 'SUPER_ADMIN',
+    createdAt: new Date().toISOString(),
+    password: 'password123',
+  },
+  // Backward compatibility aliases
   'customer@craftsland.com': {
     id: 'mock-cust-01',
-    email: 'customer@craftsland.com',
+    email: 'customer@tronx.com',
     fullName: 'Lady Genevieve Sterling',
     phone: '+1 555-234-5678',
     role: 'CUSTOMER',
@@ -16,7 +54,7 @@ const DEV_MOCK_ACCOUNTS: Record<string, UserProfile & { password: string }> = {
   },
   'admin@craftsland.com': {
     id: 'mock-admin-01',
-    email: 'admin@craftsland.com',
+    email: 'admin@tronx.com',
     fullName: 'Director Julian Vance',
     phone: '+1 555-876-5432',
     role: 'ADMIN',
@@ -25,7 +63,7 @@ const DEV_MOCK_ACCOUNTS: Record<string, UserProfile & { password: string }> = {
   },
   'kitchen@craftsland.com': {
     id: 'mock-kitch-01',
-    email: 'kitchen@craftsland.com',
+    email: 'kitchen@tronx.com',
     fullName: 'Chef de Cuisine Marcus Reid',
     phone: '+1 555-345-6789',
     role: 'KITCHEN',
@@ -34,7 +72,7 @@ const DEV_MOCK_ACCOUNTS: Record<string, UserProfile & { password: string }> = {
   },
   'superadmin@craftsland.com': {
     id: 'mock-super-01',
-    email: 'superadmin@craftsland.com',
+    email: 'superadmin@tronx.com',
     fullName: 'Grand Maitre Dominique',
     phone: '+1 555-999-8888',
     role: 'SUPER_ADMIN',
@@ -227,7 +265,7 @@ export class AuthService {
   static async getCurrentProfile(): Promise<UserProfile | null> {
     if (env.isDevelopment && !env.supabaseUrl.includes('.supabase.co')) {
       // Default to standard customer mock if no active session
-      return devActiveUser || DEV_MOCK_ACCOUNTS['customer@craftsland.com'];
+      return devActiveUser || DEV_MOCK_ACCOUNTS['customer@tronx.com'];
     }
 
     const { data: { user }, error: userError } = await supabase.auth.getUser();

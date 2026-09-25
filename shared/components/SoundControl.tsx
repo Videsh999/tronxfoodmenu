@@ -50,10 +50,10 @@ export const SoundControl: React.FC = () => {
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         style={{
-          background: 'linear-gradient(180deg, #386043 0%, #31543A 50%, #26432E 100%)',
-          boxShadow: '0 8px 25px rgba(49, 84, 58, 0.45), 0 2px 6px rgba(24, 32, 25, 0.2)',
+          background: 'linear-gradient(180deg, #78383B 0%, #602E31 50%, #4D2326 100%)',
+          boxShadow: '0 8px 25px rgba(96, 46, 49, 0.45), 0 2px 6px rgba(36, 20, 22, 0.2)',
         }}
-        className="group relative flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-6 sm:py-2.5 md:px-7 md:py-3 rounded-full border border-white/35 border-t-white/50 text-white cursor-pointer select-none touch-manipulation transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#78956A] focus:ring-offset-2"
+        className="group relative flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-6 sm:py-2.5 md:px-7 md:py-3 rounded-full border border-white/35 border-t-white/50 text-white cursor-pointer select-none touch-manipulation transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#B86268] focus:ring-offset-2"
         title={isPlaying ? 'Mute Ambient Music' : 'Play Ambient Dining Music'}
         aria-label={isPlaying ? 'Sound On - Click to mute' : 'Sound Off - Click to play'}
       >

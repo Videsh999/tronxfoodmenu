@@ -4,60 +4,60 @@
 @source "..";
 
 @theme {
-  /* CraftsLand Unified Botanical Palette (Inspired by THE OH! aesthetic) */
-  --color-brand-bg: #F7F4EC;
-  --color-brand-cream: #FAF8F3;
-  --color-brand-surface: #E8E5D8;
-  --color-brand-border: #DDD9CB;
+  /* Tronx Unified Organic Wine & Ivory Palette (Inspired by Moai aesthetic) */
+  --color-brand-bg: #FFF5EC;
+  --color-brand-cream: #FAF2EA;
+  --color-brand-surface: #F3E8DC;
+  --color-brand-border: #E8D9CC;
   --color-brand-card: #FFFFFF;
-  --color-brand-text: #182019;
-  --color-brand-text-secondary: #3A453C;
-  --color-brand-muted: #626F64;
-  --color-brand-botanical: #31543A;
-  --color-brand-botanical-hover: #26432E;
-  --color-brand-botanical-dark: #1E3524;
-  --color-brand-botanical-light: #E4ECE5;
-  --color-brand-sage: #78956A;
-  --color-brand-sage-hover: #67825A;
-  --color-brand-sage-light: #EEF3EB;
-  --color-brand-terracotta: #C97852;
-  --color-brand-terracotta-hover: #B56641;
-  --color-brand-terracotta-light: #F7ECE6;
-  --color-brand-error: #A8382B;
-  --color-brand-error-light: #FCEBE9;
+  --color-brand-text: #241416;
+  --color-brand-text-secondary: #533B3D;
+  --color-brand-muted: #7E6568;
+  --color-brand-botanical: #602E31;
+  --color-brand-botanical-hover: #4D2326;
+  --color-brand-botanical-dark: #3A181A;
+  --color-brand-botanical-light: #F8EFEA;
+  --color-brand-sage: #B86268;
+  --color-brand-sage-hover: #9E5055;
+  --color-brand-sage-light: #FBF1F0;
+  --color-brand-terracotta: #C2674F;
+  --color-brand-terracotta-hover: #A8543E;
+  --color-brand-terracotta-light: #FDF0EB;
+  --color-brand-error: #9E2A2B;
+  --color-brand-error-light: #FDF0EF;
 
   /* Backward Compatible Semantic Mappings */
-  --color-cust-bg: #F7F4EC;
-  --color-cust-pale: #FAF8F3;
+  --color-cust-bg: #FFF5EC;
+  --color-cust-pale: #FAF2EA;
   --color-cust-card: #FFFFFF;
-  --color-cust-border: #DDD9CB;
-  --color-cust-green: #31543A;
-  --color-cust-green-hover: #26432E;
-  --color-cust-green-dark: #1E3524;
-  --color-cust-green-light: #E4ECE5;
-  --color-cust-text: #182019;
-  --color-cust-text-secondary: #3A453C;
-  --color-cust-muted: #626F64;
+  --color-cust-border: #E8D9CC;
+  --color-cust-green: #602E31;
+  --color-cust-green-hover: #4D2326;
+  --color-cust-green-dark: #3A181A;
+  --color-cust-green-light: #F8EFEA;
+  --color-cust-text: #241416;
+  --color-cust-text-secondary: #533B3D;
+  --color-cust-muted: #7E6568;
 
-  --color-admin-stone: #F7F4EC;
-  --color-admin-stone-dark: #E8E5D8;
+  --color-admin-stone: #FFF5EC;
+  --color-admin-stone-dark: #F3E8DC;
   --color-admin-card: #FFFFFF;
-  --color-admin-border: #DDD9CB;
-  --color-admin-navy: #31543A;
-  --color-admin-navy-hover: #26432E;
-  --color-admin-navy-accent: #78956A;
-  --color-admin-text: #182019;
-  --color-admin-muted: #626F64;
+  --color-admin-border: #E8D9CC;
+  --color-admin-navy: #602E31;
+  --color-admin-navy-hover: #4D2326;
+  --color-admin-navy-accent: #B86268;
+  --color-admin-text: #241416;
+  --color-admin-muted: #7E6568;
 
-  --color-kitchen-mist: #F7F4EC;
-  --color-kitchen-mist-dark: #E8E5D8;
+  --color-kitchen-mist: #FFF5EC;
+  --color-kitchen-mist-dark: #F3E8DC;
   --color-kitchen-card: #FFFFFF;
-  --color-kitchen-border: #DDD9CB;
-  --color-kitchen-teal: #31543A;
-  --color-kitchen-teal-hover: #26432E;
-  --color-kitchen-teal-light: #E4ECE5;
-  --color-kitchen-text: #182019;
-  --color-kitchen-muted: #626F64;
+  --color-kitchen-border: #E8D9CC;
+  --color-kitchen-teal: #602E31;
+  --color-kitchen-teal-hover: #4D2326;
+  --color-kitchen-teal-light: #F8EFEA;
+  --color-kitchen-text: #241416;
+  --color-kitchen-muted: #7E6568;
 }
 
 @layer base {
@@ -73,8 +73,8 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #F7F4EC;
-    color: #182019;
+    background-color: #FFF5EC;
+    color: #241416;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -84,12 +84,53 @@
   font-family: 'Playfair Display', Georgia, serif;
 }
 
+.font-luxury {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
 .font-sans {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .font-display {
   font-family: 'Outfit', sans-serif;
+}
+
+/* Luxury Aesthetics Utilities */
+.glass-wine {
+  background: rgba(96, 46, 49, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-ivory {
+  background: rgba(255, 245, 236, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 217, 204, 0.6);
+}
+
+.glow-wine {
+  box-shadow: 0 0 35px -5px rgba(96, 46, 49, 0.35);
+}
+
+.glow-rose {
+  box-shadow: 0 0 25px -4px rgba(184, 98, 104, 0.35);
+}
+
+.glow-gold {
+  box-shadow: 0 0 25px -4px rgba(232, 184, 150, 0.35);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF5EC 20%, #E8B896 60%, #C2674F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wine-gradient-bg {
+  background: radial-gradient(circle at 50% 20%, #4D2326 0%, #602E31 50%, #241416 100%);
 }
 
 /* Solid Card Utilities */
@@ -99,34 +140,34 @@
 }
 
 .craft-shadow-sm {
-  box-shadow: 0 1px 3px 0 rgba(24, 32, 25, 0.04), 0 1px 2px -1px rgba(24, 32, 25, 0.04);
+  box-shadow: 0 1px 3px 0 rgba(36, 20, 22, 0.04), 0 1px 2px -1px rgba(36, 20, 22, 0.04);
 }
 
 .craft-shadow-md {
-  box-shadow: 0 4px 12px -2px rgba(24, 32, 25, 0.06), 0 2px 6px -2px rgba(24, 32, 25, 0.03);
+  box-shadow: 0 4px 12px -2px rgba(36, 20, 22, 0.06), 0 2px 6px -2px rgba(36, 20, 22, 0.03);
 }
 
 .craft-shadow-lg {
-  box-shadow: 0 10px 25px -3px rgba(24, 32, 25, 0.08), 0 4px 10px -4px rgba(24, 32, 25, 0.04);
+  box-shadow: 0 10px 25px -3px rgba(36, 20, 22, 0.08), 0 4px 10px -4px rgba(36, 20, 22, 0.04);
 }
 
-/* Scrollbar Customization - Clean Botanical Warm Neutral */
+/* Scrollbar Customization - Clean Wine Warm Neutral */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F7F4EC;
+  background: #FFF5EC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DDD9CB;
+  background: #E8D9CC;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C2BDAF;
+  background: #D4C1B0;
 }
 
 /* Customer-Scoped Ultra-Thin Luxury Scrollbar (2px to 3px maximum) */
@@ -135,7 +176,7 @@ body.customer-app,
 .customer-app,
 .customer-app * {
   scrollbar-width: thin;
-  scrollbar-color: #78956A transparent;
+  scrollbar-color: #B86268 transparent;
 }
 
 html.customer-app::-webkit-scrollbar,
@@ -163,7 +204,7 @@ body.customer-app::-webkit-scrollbar-thumb,
 .customer-app *::-webkit-scrollbar-thumb,
 .menu-dish-list-scroll::-webkit-scrollbar-thumb,
 .dish-detail-modal-scroll::-webkit-scrollbar-thumb {
-  background: #78956A !important;
+  background: #B86268 !important;
   border-radius: 9999px !important;
   min-height: 28px !important;
 }
@@ -174,7 +215,7 @@ body.customer-app::-webkit-scrollbar-thumb:hover,
 .customer-app *::-webkit-scrollbar-thumb:hover,
 .menu-dish-list-scroll::-webkit-scrollbar-thumb:hover,
 .dish-detail-modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #31543A !important;
+  background: #602E31 !important;
 }
 
 html.customer-app::-webkit-scrollbar-button,
@@ -200,7 +241,7 @@ body.customer-app::-webkit-scrollbar-corner,
 /* Dish Detail Modal Scoped 2px Ultra-Thin Luxury Scrollbar */
 .dish-detail-modal-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #78956A transparent;
+  scrollbar-color: #B86268 transparent;
   overscroll-behavior: contain;
 }
 
@@ -214,13 +255,13 @@ body.customer-app::-webkit-scrollbar-corner,
 }
 
 .dish-detail-modal-scroll::-webkit-scrollbar-thumb {
-  background: #78956A !important;
+  background: #B86268 !important;
   border-radius: 9999px !important;
   min-height: 24px !important;
 }
 
 .dish-detail-modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #31543A !important;
+  background: #602E31 !important;
 }
 
 .dish-detail-modal-scroll::-webkit-scrollbar-button {

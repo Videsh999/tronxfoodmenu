@@ -18,13 +18,13 @@ export const FavoritesPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-      <MetaTags title="Saved Favorites | Aura" description="Your bookmarked artisanal dishes and culinary favorites." />
+      <MetaTags title="Saved Favorites | Tronx" description="Your bookmarked artisanal dishes and culinary favorites." />
 
       <div className="text-center space-y-2">
-        <span className="text-xs uppercase font-sans tracking-[0.3em] text-[#31543A] font-bold block">
+        <span className="text-xs uppercase font-sans tracking-[0.3em] text-[#602E31] font-bold block">
           Your Curated Collection
         </span>
-        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#182019]">
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#241416]">
           Saved Favorites ({favoritedDishes.length})
         </h1>
       </div>
@@ -34,11 +34,11 @@ export const FavoritesPage: React.FC = () => {
           <EmptyState
             title="No Saved Favorites Yet"
             description="Tap the heart icon (♡) on any dish across our video-first menu to keep your favorite recipes at your fingertips."
-            icon={<Heart className="w-7 h-7 text-[#C97852]" />}
+            icon={<Heart className="w-7 h-7 text-[#C2674F]" />}
             action={
               <Link
                 to="/menu"
-                className="inline-flex items-center gap-2 min-h-[44px] px-6 py-2.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 min-h-[44px] px-6 py-2.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold text-xs uppercase tracking-wider shadow-sm transition-colors cursor-pointer"
               >
                 Explore Video Menu
               </Link>

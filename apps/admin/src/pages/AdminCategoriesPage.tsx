@@ -51,12 +51,12 @@ export const AdminCategoriesPage: React.FC = () => {
 
   return (
     <AdminLayout>
-      <MetaTags title="Categories Management | Craftsland Admin" />
+      <MetaTags title="Categories Management | Tronx Admin" />
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD9CB] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8D9CC] pb-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-[#182019]">Menu Categories</h1>
-          <p className="text-xs text-[#626F64] font-medium">Structure menu sections, display order, and visibility</p>
+          <h1 className="font-serif text-3xl font-bold text-[#241416]">Menu Categories</h1>
+          <p className="text-xs text-[#7E6568] font-medium">Structure menu sections, display order, and visibility</p>
         </div>
         <button
           onClick={() => {
@@ -68,16 +68,16 @@ export const AdminCategoriesPage: React.FC = () => {
             });
             setIsModalOpen(true);
           }}
-          className="px-5 py-2.5 rounded-xl bg-[#31543A] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md hover:bg-[#26432E] transition-all min-h-[44px]"
+          className="px-5 py-2.5 rounded-xl bg-[#602E31] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md hover:bg-[#4D2326] transition-all min-h-[44px]"
         >
           <Plus className="w-4 h-4" /> Add Category
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl overflow-hidden border border-[#DDD9CB] shadow-sm">
+      <div className="bg-white rounded-2xl overflow-hidden border border-[#E8D9CC] shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#FAF8F3] border-b border-[#DDD9CB] text-[#3A453C] uppercase text-[10px] font-mono font-bold tracking-wider">
+            <thead className="bg-[#FAF2EA] border-b border-[#E8D9CC] text-[#533B3D] uppercase text-[10px] font-mono font-bold tracking-wider">
               <tr>
                 <th className="p-4">Display Order</th>
                 <th className="p-4">Category Name</th>
@@ -86,35 +86,35 @@ export const AdminCategoriesPage: React.FC = () => {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD9CB]">
+            <tbody className="divide-y divide-[#E8D9CC]">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-[#626F64] font-mono animate-pulse">
+                  <td colSpan={5} className="p-8 text-center text-[#7E6568] font-mono animate-pulse">
                     Loading categories...
                   </td>
                 </tr>
               ) : categories.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-[#626F64] font-serif text-sm">
+                  <td colSpan={5} className="p-8 text-center text-[#7E6568] font-serif text-sm">
                     No categories defined.
                   </td>
                 </tr>
               ) : (
                 categories.map((cat) => (
-                  <tr key={cat.id} className="hover:bg-[#FAF8F3] transition-colors">
-                    <td className="p-4 font-mono font-bold text-[#182019]">#{cat.displayOrder}</td>
-                    <td className="p-4 font-serif font-bold text-[#182019] text-sm">{cat.name}</td>
-                    <td className="p-4 font-mono text-[#626F64]">{cat.slug}</td>
+                  <tr key={cat.id} className="hover:bg-[#FAF2EA] transition-colors">
+                    <td className="p-4 font-mono font-bold text-[#241416]">#{cat.displayOrder}</td>
+                    <td className="p-4 font-serif font-bold text-[#241416] text-sm">{cat.name}</td>
+                    <td className="p-4 font-mono text-[#7E6568]">{cat.slug}</td>
                     <td className="p-4">
                       <button
                         onClick={() => handleToggleActive(cat)}
                         className={`flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] font-bold cursor-pointer transition-colors ${
                           cat.isActive
-                            ? 'bg-[#FAF8F3] text-[#31543A] border border-[#31543A]/30'
-                            : 'bg-[#A8382B]/10 text-[#A8382B] border border-[#A8382B]/30'
+                            ? 'bg-[#FAF2EA] text-[#602E31] border border-[#602E31]/30'
+                            : 'bg-[#C2674F]/10 text-[#C2674F] border border-[#C2674F]/30'
                         }`}
                       >
-                        {cat.isActive ? <ToggleRight className="w-4 h-4 text-[#31543A]" /> : <ToggleLeft className="w-4 h-4 text-[#A8382B]" />}
+                        {cat.isActive ? <ToggleRight className="w-4 h-4 text-[#602E31]" /> : <ToggleLeft className="w-4 h-4 text-[#C2674F]" />}
                         {cat.isActive ? 'Active' : 'Hidden'}
                       </button>
                     </td>
@@ -125,14 +125,14 @@ export const AdminCategoriesPage: React.FC = () => {
                             setEditingCategory(cat);
                             setIsModalOpen(true);
                           }}
-                          className="p-1.5 rounded-lg bg-[#FAF8F3] border border-[#DDD9CB] text-[#182019] hover:bg-[#31543A] hover:text-white cursor-pointer transition-colors shadow-xs"
+                          className="p-1.5 rounded-lg bg-[#FAF2EA] border border-[#E8D9CC] text-[#241416] hover:bg-[#602E31] hover:text-white cursor-pointer transition-colors shadow-xs"
                           title="Edit Category"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDelete(cat.id)}
-                          className="p-1.5 rounded-lg bg-[#A8382B]/10 border border-[#A8382B]/20 text-[#A8382B] hover:bg-[#A8382B]/20 cursor-pointer transition-colors shadow-xs"
+                          className="p-1.5 rounded-lg bg-[#C2674F]/10 border border-[#C2674F]/20 text-[#C2674F] hover:bg-[#C2674F]/20 cursor-pointer transition-colors shadow-xs"
                           title="Delete Category"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -152,16 +152,16 @@ export const AdminCategoriesPage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
           <form
             onSubmit={handleSaveCategory}
-            className="bg-white w-full max-w-md border border-[#DDD9CB] rounded-3xl p-6 space-y-4 text-[#182019] shadow-2xl"
+            className="bg-white w-full max-w-md border border-[#E8D9CC] rounded-3xl p-6 space-y-4 text-[#241416] shadow-2xl"
           >
-            <div className="flex justify-between items-center border-b border-[#DDD9CB] pb-3">
-              <h3 className="font-serif text-xl font-bold text-[#182019]">
+            <div className="flex justify-between items-center border-b border-[#E8D9CC] pb-3">
+              <h3 className="font-serif text-xl font-bold text-[#241416]">
                 {editingCategory.id ? 'Edit Category' : 'Add Category'}
               </h3>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-full text-[#626F64] hover:text-[#182019] hover:bg-[#FAF8F3] cursor-pointer transition-colors"
+                className="p-1.5 rounded-full text-[#7E6568] hover:text-[#241416] hover:bg-[#FAF2EA] cursor-pointer transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -169,50 +169,50 @@ export const AdminCategoriesPage: React.FC = () => {
 
             <div className="space-y-3 text-xs">
               <div className="space-y-1">
-                <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Category Name *</label>
+                <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Category Name *</label>
                 <input
                   type="text"
                   required
                   value={editingCategory.name || ''}
                   onChange={(e) => setEditingCategory({ ...editingCategory, name: e.target.value })}
                   placeholder="e.g. Sommelier Cellar & Cocktails"
-                  className="w-full bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl px-3 py-2 text-xs text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+                  className="w-full bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl px-3 py-2 text-xs text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">URL Slug (Unique)</label>
+                <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">URL Slug (Unique)</label>
                 <input
                   type="text"
                   value={editingCategory.slug || ''}
                   onChange={(e) => setEditingCategory({ ...editingCategory, slug: e.target.value })}
                   placeholder="e.g. wines"
-                  className="w-full bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl px-3 py-2 text-xs text-[#182019] placeholder-[#626F64]/50 font-mono focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+                  className="w-full bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl px-3 py-2 text-xs text-[#241416] placeholder-[#7E6568]/50 font-mono focus:outline-none focus:border-[#602E31] transition-colors font-medium"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Display Order Priority</label>
+                <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Display Order Priority</label>
                 <input
                   type="number"
                   value={editingCategory.displayOrder || 1}
                   onChange={(e) => setEditingCategory({ ...editingCategory, displayOrder: parseInt(e.target.value) || 1 })}
-                  className="w-full bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl px-3 py-2 text-xs text-[#182019] font-mono focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+                  className="w-full bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl px-3 py-2 text-xs text-[#241416] font-mono focus:outline-none focus:border-[#602E31] transition-colors font-medium"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-[#DDD9CB] text-xs">
+            <div className="flex justify-end gap-3 pt-4 border-t border-[#E8D9CC] text-xs">
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-5 py-2.5 rounded-xl border border-[#DDD9CB] text-[#182019] hover:bg-[#FAF8F3] font-bold cursor-pointer transition-colors shadow-xs"
+                className="px-5 py-2.5 rounded-xl border border-[#E8D9CC] text-[#241416] hover:bg-[#FAF2EA] font-bold cursor-pointer transition-colors shadow-xs"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-xl bg-[#31543A] text-white hover:bg-[#26432E] font-bold uppercase tracking-wider cursor-pointer shadow-md transition-all"
+                className="px-6 py-2.5 rounded-xl bg-[#602E31] text-white hover:bg-[#4D2326] font-bold uppercase tracking-wider cursor-pointer shadow-md transition-all"
               >
                 Save Category
               </button>

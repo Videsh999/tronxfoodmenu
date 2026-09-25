@@ -7,7 +7,7 @@ import { Shield, AlertCircle } from 'lucide-react';
 export const AdminLoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [email, setEmail] = useState('admin@craftsland.com');
+  const [email, setEmail] = useState('admin@tronx.com');
   const [password, setPassword] = useState('password123');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,15 +31,15 @@ export const AdminLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F4EC] text-[#182019] flex items-center justify-center p-4">
-      <MetaTags title="Admin Authentication | Craftsland" />
-      <div className="bg-white max-w-md w-full p-8 rounded-3xl border border-[#DDD9CB] space-y-6 shadow-xl">
+    <div className="min-h-screen bg-[#FFF5EC] text-[#241416] flex items-center justify-center p-4">
+      <MetaTags title="Admin Authentication | Tronx" />
+      <div className="bg-white max-w-md w-full p-8 rounded-3xl border border-[#E8D9CC] space-y-6 shadow-xl">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-[#FAF8F3] border border-[#DDD9CB] text-[#31543A] flex items-center justify-center mx-auto shadow-xs">
+          <div className="w-14 h-14 rounded-2xl bg-[#FAF2EA] border border-[#E8D9CC] text-[#602E31] flex items-center justify-center mx-auto shadow-xs">
             <Shield className="w-8 h-8" />
           </div>
-          <h1 className="font-serif text-2xl font-bold text-[#182019]">Admin Command Portal</h1>
-          <p className="text-xs text-[#626F64] font-medium">Executive staff access strictly enforced via Supabase RLS</p>
+          <h1 className="font-serif text-2xl font-bold text-[#241416]">Admin Command Portal</h1>
+          <p className="text-xs text-[#7E6568] font-medium">Executive staff access strictly enforced via Supabase RLS</p>
         </div>
 
         {error && (
@@ -51,33 +51,33 @@ export const AdminLoginPage: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div className="space-y-1">
-            <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Admin Email</label>
+            <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Admin Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@craftsland.com"
-              className="w-full px-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+              placeholder="admin@tronx.com"
+              className="w-full px-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Passkey</label>
+            <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Passkey</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+              className="w-full px-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold uppercase tracking-wider text-xs shadow-md cursor-pointer disabled:opacity-50 transition-all min-h-[48px]"
+            className="w-full py-3.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold uppercase tracking-wider text-xs shadow-md cursor-pointer disabled:opacity-50 transition-all min-h-[48px]"
           >
             {isSubmitting ? 'Authenticating...' : 'Authenticate Session'}
           </button>

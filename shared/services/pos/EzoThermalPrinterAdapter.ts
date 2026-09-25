@@ -66,8 +66,8 @@ export class EzoThermalPrinterAdapter implements IPosPrinterAdapter {
     const divider = '----------------------------------------';
     const lines: string[] = [];
 
-    lines.push('           CRAFTSLAND RESTAURANT         ');
-    lines.push('     Botanical Dining & Hearth Registry  ');
+    lines.push('              TRONX RESTAURANT           ');
+    lines.push('       Good Food Brighter Moods          ');
     lines.push('      GSTIN: 29AABCC1234F1Z8             ');
     lines.push(divider);
     lines.push(`Receipt: ${invNumber}`);

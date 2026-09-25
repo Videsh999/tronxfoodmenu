@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Calendar, User, Menu as MenuIcon, X, Volume2, VolumeX } from 'lucide-react';
+import { ShoppingBag, Calendar, User, Menu as MenuIcon, X, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { useCart } from '@shared/hooks/useCart';
 import { useMusic } from '@shared/context/MusicContext';
-import { CraftslandLogo } from '@shared/components/CraftslandLogo';
+import { TronxLogo } from '@shared/components/CraftslandLogo';
 
 interface NavbarProps {
   onOpenCart?: () => void;
@@ -27,6 +27,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleOpenAura = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('open-ask-aura', {
+          detail: { question: 'What do you recommend for dinner tonight?' },
+        })
+      );
+    }
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
@@ -36,59 +46,86 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
   ];
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#002B08]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-md'
-          : 'bg-[#002B08] py-4 border-b border-white/10'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* Craftsland Brand Logo with Cream & Sage Inverted Crest */}
-          <Link to="/" className="group flex items-center transition-transform duration-300 hover:scale-[1.02]">
-            <CraftslandLogo variant="green-invert" size="md" />
-          </Link>
+    <>
+      {/* Editorial Announcement Banner */}
+      <div className="bg-[#4D2326] text-[#E8D9CC] text-[10px] sm:text-[11px] font-sans font-semibold uppercase tracking-[0.24em] py-1.5 px-4 text-center border-b border-white/10 flex items-center justify-center gap-3">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+        </span>
+        <span>Open Tonight: 16:30 – 23:30</span>
+        <span className="hidden sm:inline-block text-white/30">•</span>
+        <span className="hidden sm:inline-block text-[#E8B896]">Complimentary Truffle Brioche with Tasting Menu</span>
+        <span className="hidden md:inline-block text-white/30">•</span>
+        <Link to="/reservation" className="hidden md:inline-block underline hover:text-white transition-colors">
+          Reserve Sanctuary
+        </Link>
+      </div>
 
-          {/* Editorial Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 sm:space-x-8">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-xs font-medium tracking-[0.2em] uppercase transition-all duration-200 relative py-1.5 ${
-                    isActive
-                      ? 'text-[#F7F4EC] font-semibold'
-                      : 'text-[#DDD9CB]/80 hover:text-white'
-                  }`}
-                >
-                  {link.name}
-                  {isActive && (
-                    <motion.span
-                      layoutId="custActiveNavIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#78956A] rounded-full"
-                      transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Luxury Actions & Utilities */}
-          <div className="flex items-center space-x-2.5 sm:space-x-4">
+      <header
+        className={`sticky top-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#602E31]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-md'
+            : 'bg-[#602E31] py-4 border-b border-white/10'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
             
-            {/* Table Reservation Button */}
-            <Link
-              to="/reservation"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#78956A]/60 bg-[#31543A] hover:bg-[#26432E] text-[#F7F4EC] font-sans font-semibold text-xs tracking-wider uppercase transition-all duration-200 shadow-sm active:scale-[0.97]"
-            >
-              <Calendar className="w-3.5 h-3.5 text-[#78956A]" />
-              <span>Reserve Table</span>
+            {/* Tronx Brand Logo with Cream & Wine Inverted Crest */}
+            <Link to="/" className="group flex items-center transition-transform duration-300 hover:scale-[1.02]">
+              <TronxLogo variant="green-invert" size="md" />
             </Link>
+
+            {/* Editorial Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center space-x-7 sm:space-x-8">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`text-xs font-medium tracking-[0.2em] uppercase transition-all duration-200 relative py-1.5 ${
+                      isActive
+                        ? 'text-[#FFF5EC] font-semibold'
+                        : 'text-[#E8D9CC]/80 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <motion.span
+                        layoutId="custActiveNavIndicator"
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#FFF5EC] rounded-full"
+                        transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Luxury Actions & Utilities */}
+            <div className="flex items-center space-x-2.5 sm:space-x-3.5">
+              
+              {/* Ask Aura AI Concierge Button */}
+              <button
+                type="button"
+                onClick={handleOpenAura}
+                className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-[#E8B896]/40 bg-gradient-to-r from-white/10 to-[#C2674F]/25 hover:from-white/20 hover:to-[#C2674F]/35 text-[#FFF5EC] font-sans font-semibold text-xs tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.97]"
+                title="Consult Tronx AI Concierge"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#E8B896] animate-pulse" />
+                <span>Ask Aura</span>
+              </button>
+
+              {/* Table Reservation Button */}
+              <Link
+                to="/reservation"
+                className="hidden sm:inline-flex items-center gap-2 px-4.5 py-2 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-[#FFF5EC] font-sans font-semibold text-xs tracking-wider uppercase transition-all duration-200 shadow-sm active:scale-[0.97]"
+              >
+                <Calendar className="w-3.5 h-3.5 text-[#E8D9CC]" />
+                <span>Reserve</span>
+              </Link>
 
             {/* Sound Toggle - Circular Outlined Container */}
             <button
@@ -99,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
               aria-label={isPlaying ? 'Sound On' : 'Sound Off'}
             >
               {isPlaying ? (
-                <Volume2 className="w-4 h-4 text-[#78956A]" />
+                <Volume2 className="w-4 h-4 text-[#FFF5EC]" />
               ) : (
                 <VolumeX className="w-4 h-4 text-white/60" />
               )}
@@ -130,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.5, opacity: 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                    className="absolute -top-1 -right-1 w-4.5 h-4.5 rounded-full bg-[#C97852] text-white font-bold text-[9px] flex items-center justify-center border-2 border-[#002B08] shadow-xs"
+                    className="absolute -top-1 -right-1 w-4.5 h-4.5 rounded-full bg-[#C2674F] text-white font-bold text-[9px] flex items-center justify-center border-2 border-[#602E31] shadow-xs"
                   >
                     {totalItemsCount}
                   </motion.span>
@@ -159,7 +196,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden border-t border-white/10 bg-[#002B08] px-6 py-6 space-y-5 shadow-2xl overflow-hidden"
+            className="lg:hidden border-t border-white/10 bg-[#602E31] px-6 py-6 space-y-5 shadow-2xl overflow-hidden"
           >
             <div className="flex flex-col space-y-3.5">
               {navLinks.map((link) => (
@@ -168,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-sm font-medium tracking-[0.2em] uppercase transition-colors ${
-                    location.pathname === link.path ? 'text-[#78956A] font-bold' : 'text-[#DDD9CB]/80 hover:text-white'
+                    location.pathname === link.path ? 'text-[#FFF5EC] font-bold' : 'text-[#E8D9CC]/80 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -180,11 +217,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
               <button
                 type="button"
                 onClick={toggleSound}
-                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/15 text-[#F7F4EC] text-xs font-semibold uppercase tracking-wider active:scale-[0.97] transition-all cursor-pointer"
+                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/15 text-[#FFF5EC] text-xs font-semibold uppercase tracking-wider active:scale-[0.97] transition-all cursor-pointer"
               >
                 {isPlaying ? (
                   <>
-                    <Volume2 className="w-4 h-4 text-[#78956A]" />
+                    <Volume2 className="w-4 h-4 text-[#FFF5EC]" />
                     <span>Ambient Sound: On</span>
                   </>
                 ) : (
@@ -198,7 +235,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
               <Link
                 to="/reservation"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-3.5 rounded-xl bg-[#31543A] text-[#F7F4EC] font-semibold text-xs uppercase tracking-wider shadow-sm hover:bg-[#26432E] active:scale-[0.97] transition-transform"
+                className="w-full text-center py-3.5 rounded-xl bg-white/10 border border-white/20 text-[#FFF5EC] font-semibold text-xs uppercase tracking-wider shadow-sm hover:bg-white/20 active:scale-[0.97] transition-transform"
               >
                 Reserve a Table
               </Link>
@@ -207,6 +244,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCart }) => {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 };
 

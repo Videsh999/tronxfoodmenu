@@ -45,7 +45,7 @@ export class AnalyticsService {
       { dishId: 'd1', name: 'Imperial Beluga Caviar Tartlet', category: 'Caviar & Starters', unitsSold: 38, revenue: 3610.00 },
       { dishId: 'd4', name: 'Wild Roasted Chilean Sea Bass', category: 'Signature Mains', unitsSold: 29, revenue: 2262.00 },
       { dishId: 'd2', name: 'Hokkaido Scallop Carpaccio', category: 'Caviar & Starters', unitsSold: 24, revenue: 1008.00 },
-      { dishId: 'd5', name: 'Craftsland Smoked Chocolate Sphere', category: 'Artisanal Desserts', unitsSold: 56, revenue: 1568.00 },
+      { dishId: 'd5', name: 'Tronx Smoked Chocolate Sphere', category: 'Artisanal Desserts', unitsSold: 56, revenue: 1568.00 },
     ];
   }
 

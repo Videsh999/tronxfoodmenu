@@ -7,7 +7,7 @@ import { ChefHat, AlertCircle } from 'lucide-react';
 export const KitchenLoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [email, setEmail] = useState('kitchen@craftsland.com');
+  const [email, setEmail] = useState('kitchen@tronx.com');
   const [password, setPassword] = useState('password123');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,53 +31,53 @@ export const KitchenLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F4EC] text-[#182019] flex items-center justify-center p-4">
-      <MetaTags title="Kitchen Display Authentication | Craftsland" />
-      <div className="bg-white max-w-md w-full p-8 rounded-3xl border-2 border-[#DDD9CB] space-y-6 shadow-xl">
+    <div className="min-h-screen bg-[#FFF5EC] text-[#241416] flex items-center justify-center p-4">
+      <MetaTags title="Kitchen Display Authentication | Tronx" />
+      <div className="bg-white max-w-md w-full p-8 rounded-3xl border border-[#E8D9CC] space-y-6 shadow-xl">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-[#FAF8F3] border border-[#DDD9CB] text-[#31543A] flex items-center justify-center mx-auto shadow-xs">
+          <div className="w-14 h-14 rounded-2xl bg-[#FAF2EA] border border-[#E8D9CC] text-[#602E31] flex items-center justify-center mx-auto shadow-xs">
             <ChefHat className="w-8 h-8" />
           </div>
-          <h1 className="font-serif text-2xl font-bold text-[#31543A]">Kitchen Display Login</h1>
-          <p className="text-xs text-[#626F64] font-medium">Authorized culinary staff and expeditor pass access</p>
+          <h1 className="font-serif text-2xl font-bold text-[#602E31]">Kitchen Display Login</h1>
+          <p className="text-xs text-[#7E6568] font-medium">Authorized culinary staff and expeditor pass access</p>
         </div>
 
         {error && (
-          <div className="bg-[#A8382B]/10 border border-[#A8382B]/20 p-3 rounded-xl text-xs text-[#A8382B] flex items-center gap-2 font-medium">
-            <AlertCircle className="w-4 h-4 text-[#A8382B] flex-shrink-0" />
+          <div className="bg-[#9E2A2B]/10 border border-[#9E2A2B]/20 p-3 rounded-xl text-xs text-[#9E2A2B] flex items-center gap-2 font-medium">
+            <AlertCircle className="w-4 h-4 text-[#9E2A2B] flex-shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div className="space-y-1">
-            <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Kitchen Pass Email</label>
+            <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Kitchen Pass Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="kitchen@craftsland.com"
-              className="w-full px-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+              placeholder="kitchen@tronx.com"
+              className="w-full px-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="text-[#3A453C] font-bold uppercase text-[10px] tracking-wider">Passkey</label>
+            <label className="text-[#533B3D] font-bold uppercase text-[10px] tracking-wider">Passkey</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+              className="w-full px-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold uppercase tracking-wider text-xs shadow-md cursor-pointer disabled:opacity-50 transition-all min-h-[48px]"
+            className="w-full py-3.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-white font-bold uppercase tracking-wider text-xs shadow-md cursor-pointer disabled:opacity-50 transition-all min-h-[48px]"
           >
             {isSubmitting ? 'Verifying...' : 'Access Kitchen Display'}
           </button>

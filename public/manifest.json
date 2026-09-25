@@ -1,12 +1,12 @@
 {
-  "name": "Aura — Good Food Brighter Moods",
-  "short_name": "Aura",
-  "description": "Artisanal dining experience crafted with passion, wood-fired culinary arts, and botanical mixology.",
+  "name": "Tronx — Luxury Dining & Table Reservation Platform",
+  "short_name": "Tronx",
+  "description": "Experience curated haute cuisine, sommelier reserves, and effortless table reservations with Tronx.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#FFEFE2",
-  "theme_color": "#002B08",
+  "background_color": "#FFF5EC",
+  "theme_color": "#602E31",
   "icons": [
     {
       "src": "/favicon.svg",

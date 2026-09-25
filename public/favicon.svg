@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="128" fill="#002B08"/>
-  <circle cx="256" cy="256" r="210" stroke="#78956A" stroke-width="4" stroke-opacity="0.25" />
-  <circle cx="256" cy="256" r="185" stroke="#C97852" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="6 6" />
-  <path d="M256 112L156 372H208L230 312H282L304 372H356L256 112ZM256 218L273 268H239L256 218Z" fill="#FFEFE2"/>
-  <path d="M256 92C266 72 288 64 306 68C302 88 284 104 256 108C256 102 256 96 256 92Z" fill="#78956A"/>
-  <path d="M256 92C246 72 224 64 206 68C210 88 228 104 256 108C256 102 256 96 256 92Z" fill="#C97852"/>
-  <circle cx="256" cy="402" r="7" fill="#C97852" />
+  <rect width="512" height="512" rx="128" fill="#602E31"/>
+  <circle cx="256" cy="256" r="216" stroke="#FFF5EC" stroke-width="3" stroke-opacity="0.2" />
+  <circle cx="256" cy="256" r="192" stroke="#C2674F" stroke-width="2" stroke-opacity="0.35" stroke-dasharray="6 6" />
+  <!-- Sculpted Monolith 'T' -->
+  <path d="M120 144C120 130.745 130.745 120 144 120H368C381.255 120 392 130.745 392 144V184C392 190.627 386.627 196 380 196H284V376C284 389.255 273.255 400 260 400H252C238.745 400 228 389.255 228 376V196H132C125.373 196 120 190.627 120 184V144Z" fill="#FFF5EC"/>
+  <!-- Negative space Moai monolith silhouette contour -->
+  <path d="M256 196C270 212 284 228 284 250C284 272 262 282 256 292C250 282 228 272 228 250C228 228 242 212 256 196Z" fill="#602E31"/>
+  <circle cx="256" cy="436" r="10" fill="#C2674F" />
 </svg>

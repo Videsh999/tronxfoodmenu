@@ -52,19 +52,19 @@ export const AdminReviewsPage: React.FC = () => {
 
   return (
     <AdminLayout>
-      <MetaTags title="Review Moderation | Craftsland Admin" />
+      <MetaTags title="Review Moderation | Tronx Admin" />
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDD9CB] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8D9CC] pb-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-[#182019]">Customer Review Moderation</h1>
-          <p className="text-xs text-[#626F64] font-medium">Review, publish, or hide dining feedback and star ratings</p>
+          <h1 className="font-serif text-3xl font-bold text-[#241416]">Customer Review Moderation</h1>
+          <p className="text-xs text-[#7E6568] font-medium">Review, publish, or hide dining feedback and star ratings</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl overflow-hidden border border-[#DDD9CB] shadow-sm">
+      <div className="bg-white rounded-2xl overflow-hidden border border-[#E8D9CC] shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#FAF8F3] border-b border-[#DDD9CB] text-[#3A453C] uppercase text-[10px] font-mono font-bold tracking-wider">
+            <thead className="bg-[#FAF2EA] border-b border-[#E8D9CC] text-[#533B3D] uppercase text-[10px] font-mono font-bold tracking-wider">
               <tr>
                 <th className="p-4">Customer</th>
                 <th className="p-4">Target Dish</th>
@@ -74,32 +74,32 @@ export const AdminReviewsPage: React.FC = () => {
                 <th className="p-4 text-right">Publication Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#DDD9CB]">
+            <tbody className="divide-y divide-[#E8D9CC]">
               {reviews.map((rev) => (
-                <tr key={rev.id} className="hover:bg-[#FAF8F3]/60 transition-colors">
-                  <td className="p-4 font-serif font-bold text-[#182019] text-sm">{rev.customerName}</td>
-                  <td className="p-4 font-mono font-semibold text-[#182019]">{rev.dishName}</td>
+                <tr key={rev.id} className="hover:bg-[#FAF2EA]/60 transition-colors">
+                  <td className="p-4 font-serif font-bold text-[#241416] text-sm">{rev.customerName}</td>
+                  <td className="p-4 font-mono font-semibold text-[#241416]">{rev.dishName}</td>
                   <td className="p-4">
-                    <div className="flex items-center gap-1 text-[#C97852]">
+                    <div className="flex items-center gap-1 text-[#C2674F]">
                       {Array.from({ length: rev.rating }).map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-[#C97852]" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#C2674F]" />
                       ))}
                     </div>
                   </td>
                   <td className="p-4 max-w-sm">
-                    <p className="text-[#3A453C] italic font-serif leading-relaxed">"{rev.comment}"</p>
+                    <p className="text-[#533B3D] italic font-serif leading-relaxed">"{rev.comment}"</p>
                   </td>
-                  <td className="p-4 font-mono text-[#626F64]">{rev.date}</td>
+                  <td className="p-4 font-mono text-[#7E6568]">{rev.date}</td>
                   <td className="p-4 text-right">
                     <button
                       onClick={() => handleTogglePublish(rev.id)}
                       className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold cursor-pointer transition-colors flex items-center gap-1.5 ml-auto shadow-xs ${
                         rev.isPublished
-                          ? 'bg-[#31543A]/10 text-[#31543A] border border-[#31543A]/20'
-                          : 'bg-[#C97852]/15 text-[#C97852] border border-[#C97852]/30'
+                          ? 'bg-[#602E31]/10 text-[#602E31] border border-[#602E31]/20'
+                          : 'bg-[#C2674F]/15 text-[#C2674F] border border-[#C2674F]/30'
                       }`}
                     >
-                      {rev.isPublished ? <Eye className="w-3.5 h-3.5 text-[#31543A]" /> : <EyeOff className="w-3.5 h-3.5 text-[#C97852]" />}
+                      {rev.isPublished ? <Eye className="w-3.5 h-3.5 text-[#602E31]" /> : <EyeOff className="w-3.5 h-3.5 text-[#C2674F]" />}
                       {rev.isPublished ? 'Published' : 'Hidden'}
                     </button>
                   </td>

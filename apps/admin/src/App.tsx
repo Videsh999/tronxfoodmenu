@@ -8,7 +8,7 @@ import { MenuProvider } from '@shared/context/MenuContext';
 import { ThemeProvider } from '@shared/context/ThemeContext';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { RouteGuard } from '@shared/components/RouteGuard';
-import { CraftslandCursor } from '@shared/components/CraftslandCursor';
+import { TronxCursor } from '@shared/components/CraftslandCursor';
 
 // Admin Pages
 import { AdminLoginPage } from './pages/AdminLoginPage';
@@ -42,7 +42,7 @@ export const App: React.FC = () => {
         <OrderProvider>
           <MenuProvider>
             <ThemeProvider>
-              <CraftslandCursor />
+              <TronxCursor />
               <Router>
                 <Routes>
                   <Route path="/login" element={<AdminLoginPage />} />

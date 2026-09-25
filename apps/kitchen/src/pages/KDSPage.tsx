@@ -40,29 +40,29 @@ export const KDSPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F7F4EC] text-[#182019] flex flex-col p-4 sm:p-6 space-y-6">
-      <MetaTags title="Kitchen Display System (KDS) | Craftsland" />
+    <div className="min-h-screen bg-[#FFF5EC] text-[#241416] flex flex-col p-4 sm:p-6 space-y-6">
+      <MetaTags title="Kitchen Display System (KDS) | Tronx" />
 
       {/* Header Bar */}
-      <header className="bg-white p-4 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4 border border-[#DDD9CB] shadow-sm">
+      <header className="bg-white p-4 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4 border border-[#E8D9CC] shadow-sm">
         {/* Left: Branding & Clock */}
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#31543A] text-white flex items-center justify-center shadow-md">
+          <div className="w-12 h-12 rounded-xl bg-[#602E31] text-white flex items-center justify-center shadow-md">
             <ChefHat className="w-7 h-7" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-serif text-2xl font-bold text-[#31543A] tracking-wide">
-                Craftsland
+              <h1 className="font-serif text-2xl font-bold text-[#602E31] tracking-wide">
+                Tronx
               </h1>
-              <span className="text-[10px] font-mono uppercase bg-[#FAF8F3] text-[#31543A] border border-[#DDD9CB] px-2 py-0.5 rounded-full font-bold">
+              <span className="text-[10px] font-mono uppercase bg-[#FAF2EA] text-[#602E31] border border-[#E8D9CC] px-2 py-0.5 rounded-full font-bold">
                 Pass & KDS
               </span>
             </div>
-            <p className="text-xs text-[#626F64] font-mono flex items-center gap-2 mt-0.5">
-              <span className="flex items-center gap-1 text-[#182019] font-bold"><Clock className="w-3.5 h-3.5 text-[#31543A]" /> {currentTime}</span>
+            <p className="text-xs text-[#7E6568] font-mono flex items-center gap-2 mt-0.5">
+              <span className="flex items-center gap-1 text-[#241416] font-bold"><Clock className="w-3.5 h-3.5 text-[#602E31]" /> {currentTime}</span>
               <span>•</span>
-              <span>Active Tickets: <strong className="text-[#31543A] font-bold">{totalActiveCount}</strong></span>
+              <span>Active Tickets: <strong className="text-[#602E31] font-bold">{totalActiveCount}</strong></span>
             </p>
           </div>
         </div>
@@ -86,8 +86,8 @@ export const KDSPage: React.FC = () => {
             onClick={() => setSoundEnabled(!soundEnabled)}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border transition-all cursor-pointer font-bold text-xs shadow-xs ${
               soundEnabled
-                ? 'bg-[#31543A] border-[#31543A] text-white'
-                : 'bg-white border-[#DDD9CB] text-[#182019] hover:bg-[#FAF8F3]'
+                ? 'bg-[#602E31] border-[#602E31] text-white'
+                : 'bg-white border-[#E8D9CC] text-[#241416] hover:bg-[#FAF2EA]'
             }`}
             title={soundEnabled ? 'Disable Order Sound Chime' : 'Enable Order Sound Chime'}
           >
@@ -98,7 +98,7 @@ export const KDSPage: React.FC = () => {
           {/* Refresh / Reconnect Button */}
           <button
             onClick={() => refreshOrders()}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#DDD9CB] bg-white text-[#182019] hover:bg-[#FAF8F3] cursor-pointer transition-colors shadow-xs font-bold text-xs"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#E8D9CC] bg-white text-[#241416] hover:bg-[#FAF2EA] cursor-pointer transition-colors shadow-xs font-bold text-xs"
             title="Refresh Order Stream"
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -108,7 +108,7 @@ export const KDSPage: React.FC = () => {
           {/* Demo Order Simulator */}
           <button
             onClick={() => simulateNewOrder()}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#31543A] hover:bg-[#26432E] text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-md transition-all"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#602E31] hover:bg-[#4D2326] text-white font-bold text-xs uppercase tracking-wider cursor-pointer shadow-md transition-all"
             title="Inject Mock Demo Ticket"
           >
             <PlusCircle className="w-3.5 h-3.5" />
@@ -118,7 +118,7 @@ export const KDSPage: React.FC = () => {
           {/* Exit / Logout Button */}
           <button
             onClick={() => logout()}
-            className="p-2 rounded-full border border-[#DDD9CB] bg-white text-[#182019] hover:text-red-600 hover:border-red-300 cursor-pointer transition-colors shadow-xs"
+            className="p-2 rounded-full border border-[#E8D9CC] bg-white text-[#241416] hover:text-red-600 hover:border-red-300 cursor-pointer transition-colors shadow-xs"
             title="Logout of Kitchen Display"
           >
             <LogOut className="w-4 h-4" />
@@ -127,11 +127,11 @@ export const KDSPage: React.FC = () => {
       </header>
 
       {/* Filter Bar & Search */}
-      <div className="bg-white p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border border-[#DDD9CB] shadow-sm">
+      <div className="bg-white p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border border-[#E8D9CC] shadow-sm">
         {/* Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-          <span className="text-[#626F64] font-bold uppercase text-[10px] tracking-wider flex items-center gap-1 mr-1">
-            <Filter className="w-3.5 h-3.5 text-[#31543A]" /> Filter:
+          <span className="text-[#7E6568] font-bold uppercase text-[10px] tracking-wider flex items-center gap-1 mr-1">
+            <Filter className="w-3.5 h-3.5 text-[#602E31]" /> Filter:
           </span>
 
           {[
@@ -149,8 +149,8 @@ export const KDSPage: React.FC = () => {
                 onClick={() => setFilter(item.id as KDSFilter)}
                 className={`px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all cursor-pointer font-bold text-xs whitespace-nowrap shadow-xs ${
                   isActive
-                    ? 'bg-[#31543A] border-[#31543A] text-white'
-                    : 'bg-[#FAF8F3] border-[#DDD9CB] text-[#182019] hover:bg-[#DDD9CB]/30'
+                    ? 'bg-[#602E31] border-[#602E31] text-white'
+                    : 'bg-[#FAF2EA] border-[#E8D9CC] text-[#241416] hover:bg-[#E8D9CC]/30'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" /> {item.label}
@@ -161,13 +161,13 @@ export const KDSPage: React.FC = () => {
 
         {/* Search Input */}
         <div className="relative w-full sm:w-64">
-          <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-[#626F64]" />
+          <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-[#7E6568]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search ticket # or dish..."
-            className="w-full bg-[#FAF8F3] border border-[#DDD9CB] rounded-xl pl-9 pr-4 py-1.5 text-xs text-[#182019] placeholder-[#626F64]/50 focus:outline-none focus:border-[#31543A] transition-colors font-medium"
+            className="w-full bg-[#FAF2EA] border border-[#E8D9CC] rounded-xl pl-9 pr-4 py-1.5 text-xs text-[#241416] placeholder-[#7E6568]/50 focus:outline-none focus:border-[#602E31] transition-colors font-medium"
           />
         </div>
       </div>
@@ -239,16 +239,16 @@ export const KDSPage: React.FC = () => {
         </div>
 
         {/* Column 3: In Prep (PREPARING) */}
-        <div className="bg-white p-4 rounded-2xl space-y-4 border-t-4 border-t-[#31543A] border border-[#DDD9CB] shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 rounded-2xl space-y-4 border-t-4 border-t-[#602E31] border border-[#E8D9CC] shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD9CB] pb-2.5">
+            <div className="flex items-center justify-between border-b border-[#E8D9CC] pb-2.5">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#31543A] animate-pulse" />
-                <h3 className="font-serif font-bold text-sm text-[#31543A] tracking-wide uppercase">
+                <span className="w-3 h-3 rounded-full bg-[#602E31] animate-pulse" />
+                <h3 className="font-serif font-bold text-sm text-[#602E31] tracking-wide uppercase">
                   3. In Preparation
                 </h3>
               </div>
-              <span className="bg-[#FAF8F3] text-[#31543A] border border-[#DDD9CB] px-2.5 py-0.5 rounded-full font-mono text-xs font-bold">
+              <span className="bg-[#FAF2EA] text-[#602E31] border border-[#E8D9CC] px-2.5 py-0.5 rounded-full font-mono text-xs font-bold">
                 {preparingOrders.length}
               </span>
             </div>
@@ -256,7 +256,7 @@ export const KDSPage: React.FC = () => {
             <div className="space-y-3 overflow-y-auto max-h-[calc(100vh-280px)] pr-1">
               {preparingOrders.length === 0 ? (
                 <div className="text-center py-12 text-slate-400 text-xs font-serif space-y-1">
-                  <CheckCircle2 className="w-8 h-8 mx-auto opacity-40 text-[#31543A]" />
+                  <CheckCircle2 className="w-8 h-8 mx-auto opacity-40 text-[#602E31]" />
                   <p>No tickets in prep</p>
                 </div>
               ) : (
@@ -271,16 +271,16 @@ export const KDSPage: React.FC = () => {
         </div>
 
         {/* Column 4: Ready for Pass (READY) */}
-        <div className="bg-white p-4 rounded-2xl space-y-4 border-t-4 border-t-[#31543A] border border-[#DDD9CB] shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 rounded-2xl space-y-4 border-t-4 border-t-[#602E31] border border-[#E8D9CC] shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex items-center justify-between border-b border-[#DDD9CB] pb-2.5">
+            <div className="flex items-center justify-between border-b border-[#E8D9CC] pb-2.5">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#31543A]" />
-                <h3 className="font-serif font-bold text-sm text-[#31543A] tracking-wide uppercase">
+                <span className="w-3 h-3 rounded-full bg-[#602E31]" />
+                <h3 className="font-serif font-bold text-sm text-[#602E31] tracking-wide uppercase">
                   4. Ready for Pass
                 </h3>
               </div>
-              <span className="bg-[#FAF8F3] text-[#31543A] border border-[#31543A]/20 px-2.5 py-0.5 rounded-full font-mono text-xs font-bold">
+              <span className="bg-[#FAF2EA] text-[#602E31] border border-[#602E31]/20 px-2.5 py-0.5 rounded-full font-mono text-xs font-bold">
                 {readyOrders.length}
               </span>
             </div>
@@ -288,7 +288,7 @@ export const KDSPage: React.FC = () => {
             <div className="space-y-3 overflow-y-auto max-h-[calc(100vh-280px)] pr-1">
               {readyOrders.length === 0 ? (
                 <div className="text-center py-12 text-slate-400 text-xs font-serif space-y-1">
-                  <CheckCircle2 className="w-8 h-8 mx-auto opacity-40 text-[#31543A]" />
+                  <CheckCircle2 className="w-8 h-8 mx-auto opacity-40 text-[#602E31]" />
                   <p>No tickets on pass</p>
                 </div>
               ) : (

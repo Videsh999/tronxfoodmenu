@@ -1,5 +1,5 @@
-// Aura Customer Service Worker (Safe Shell & Offline Fallback)
-const CACHE_NAME = 'aura-customer-v1';
+// Tronx Customer Service Worker (Safe Shell & Offline Fallback)
+const CACHE_NAME = 'tronx-customer-v1';
 const PRECACHE_ASSETS = [
   '/',
   '/favicon.svg',
@@ -10,7 +10,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('[Aura SW] Pre-cache non-fatal error:', err);
+        console.warn('[Tronx SW] Pre-cache non-fatal error:', err);
       });
     }).then(() => self.skipWaiting())
   );
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(req).catch(() => {
         return caches.match('/') || new Response(
-          '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Aura — Offline</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="background:#FFEFE2;color:#002B08;font-family:sans-serif;text-align:center;padding:50px 20px;"><h1 style="font-size:28px;">Aura</h1><p style="color:#626F64;">You appear to be offline. Reconnect to browse the live culinary collection or check your order status.</p></body></html>',
+          '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Tronx — Offline</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="background:#FFF5EC;color:#241416;font-family:sans-serif;text-align:center;padding:50px 20px;"><h1 style="font-size:28px;color:#602E31;letter-spacing:2px;">TRONX</h1><p style="color:#7E6568;">You appear to be offline. Reconnect to browse the live culinary collection or check your order status.</p></body></html>',
           { headers: { 'Content-Type': 'text/html' } }
         );
       })

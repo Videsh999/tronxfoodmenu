@@ -77,7 +77,7 @@ export class RazorpayPaymentProvider implements PaymentGateway {
       key: params.keyId,
       amount: params.amountPaise,
       currency: params.currency || 'INR',
-      name: 'Aura Culinary Sanctuary',
+      name: 'Tronx Culinary Sanctuary',
       description: params.orderNumber ? `Order ${params.orderNumber}` : 'Fine Dining Experience',
       order_id: params.razorpayOrderId,
       prefill: {
@@ -86,7 +86,7 @@ export class RazorpayPaymentProvider implements PaymentGateway {
         contact: params.customerPhone || '',
       },
       theme: {
-        color: '#31543A',
+        color: '#602E31',
       },
       modal: {
         ondismiss: () => {

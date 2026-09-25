@@ -209,11 +209,11 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
         </div>
 
         {/* ── RIGHT SIDE (Desktop 50% / lg:w-1/2): Editorial Information Panel ── */}
-        <div className="w-full lg:w-1/2 h-full flex flex-col justify-between overflow-hidden bg-white text-[#182019]">
+        <div className="w-full lg:w-1/2 h-full flex flex-col justify-between overflow-hidden bg-white text-[#241416]">
           
           {/* Top Header Bar */}
-          <div className="px-6 sm:px-8 pt-5 pb-3 border-b border-[#DDD9CB]/60 flex items-center justify-between shrink-0">
-            <span className="text-[10px] uppercase font-sans tracking-[0.25em] text-[#31543A] font-bold">
+          <div className="px-6 sm:px-8 pt-5 pb-3 border-b border-[#E8D9CC]/60 flex items-center justify-between shrink-0">
+            <span className="text-[10px] uppercase font-sans tracking-[0.25em] text-[#602E31] font-bold">
               {dish.categorySlug.replace('-', ' ')} • Artisanal Selection
             </span>
 
@@ -222,18 +222,18 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
                 type="button"
                 onClick={() => toggleFavorite(dish.id)}
                 aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
-                className="p-2 rounded-full hover:bg-[#FAF8F3] transition-colors border border-transparent hover:border-[#DDD9CB] cursor-pointer"
+                className="p-2 rounded-full hover:bg-[#FAF2EA] transition-colors border border-transparent hover:border-[#E8D9CC] cursor-pointer"
                 title={isFav ? 'In Favorites' : 'Add to Favorites'}
               >
                 <Heart
-                  className={`w-4 h-4 transition-colors ${isFav ? 'fill-[#C97852] text-[#C97852]' : 'text-[#626F64]'}`}
+                  className={`w-4 h-4 transition-colors ${isFav ? 'fill-[#C2674F] text-[#C2674F]' : 'text-[#7E6568]'}`}
                 />
               </button>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close modal"
-                className="hidden lg:flex p-2 rounded-full hover:bg-[#FAF8F3] transition-colors border border-transparent hover:border-[#DDD9CB] cursor-pointer text-[#626F64] hover:text-[#182019]"
+                className="hidden lg:flex p-2 rounded-full hover:bg-[#FAF2EA] transition-colors border border-transparent hover:border-[#E8D9CC] cursor-pointer text-[#7E6568] hover:text-[#241416]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -258,11 +258,11 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
                       }`}
                     />
                   </span>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#182019] leading-tight">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#241416] leading-tight">
                     {dish.name}
                   </h2>
                 </div>
-                <span className="font-serif text-2xl sm:text-3xl font-bold text-[#31543A] shrink-0">
+                <span className="font-serif text-2xl sm:text-3xl font-bold text-[#602E31] shrink-0">
                   {formatPrice(unitPrice)}
                 </span>
               </div>
@@ -274,60 +274,60 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
             {/* 2x2 Information Grid (Rating, Time, Calories, Dietary) */}
             <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
               {/* Rating Card */}
-              <div className="p-3 rounded-xl bg-[#FAF8F3] border border-[#DDD9CB]/80 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#C97852]/10 text-[#C97852] flex items-center justify-center shrink-0">
-                  <Star className="w-4 h-4 fill-[#C97852]" />
+              <div className="p-3 rounded-xl bg-[#FAF2EA] border border-[#E8D9CC]/80 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#C2674F]/10 text-[#C2674F] flex items-center justify-center shrink-0">
+                  <Star className="w-4 h-4 fill-[#C2674F]" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-mono text-[#626F64] tracking-wider block">
+                  <span className="text-[10px] uppercase font-mono text-[#7E6568] tracking-wider block">
                     Rating
                   </span>
-                  <span className="text-xs font-serif font-bold text-[#182019]">
-                    4.9 ★ <span className="text-[10px] font-sans font-normal text-[#626F64]">(Curated)</span>
+                  <span className="text-xs font-serif font-bold text-[#241416]">
+                    4.9 ★ <span className="text-[10px] font-sans font-normal text-[#7E6568]">(Curated)</span>
                   </span>
                 </div>
               </div>
 
               {/* Prep Time Card */}
-              <div className="p-3 rounded-xl bg-[#FAF8F3] border border-[#DDD9CB]/80 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#31543A]/10 text-[#31543A] flex items-center justify-center shrink-0">
+              <div className="p-3 rounded-xl bg-[#FAF2EA] border border-[#E8D9CC]/80 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#602E31]/10 text-[#602E31] flex items-center justify-center shrink-0">
                   <Clock className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-mono text-[#626F64] tracking-wider block">
+                  <span className="text-[10px] uppercase font-mono text-[#7E6568] tracking-wider block">
                     Prep Time
                   </span>
-                  <span className="text-xs font-serif font-bold text-[#182019]">
+                  <span className="text-xs font-serif font-bold text-[#241416]">
                     15–20 min
                   </span>
                 </div>
               </div>
 
               {/* Calories Card */}
-              <div className="p-3 rounded-xl bg-[#FAF8F3] border border-[#DDD9CB]/80 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#C97852]/10 text-[#C97852] flex items-center justify-center shrink-0">
+              <div className="p-3 rounded-xl bg-[#FAF2EA] border border-[#E8D9CC]/80 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#C2674F]/10 text-[#C2674F] flex items-center justify-center shrink-0">
                   <Flame className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-mono text-[#626F64] tracking-wider block">
+                  <span className="text-[10px] uppercase font-mono text-[#7E6568] tracking-wider block">
                     Calories
                   </span>
-                  <span className="text-xs font-serif font-bold text-[#182019]">
+                  <span className="text-xs font-serif font-bold text-[#241416]">
                     {dish.calories ? `${dish.calories} kcal` : 'Artisanal Fresh'}
                   </span>
                 </div>
               </div>
 
               {/* Dietary Card */}
-              <div className="p-3 rounded-xl bg-[#FAF8F3] border border-[#DDD9CB]/80 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#31543A]/10 text-[#31543A] flex items-center justify-center shrink-0">
+              <div className="p-3 rounded-xl bg-[#FAF2EA] border border-[#E8D9CC]/80 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#602E31]/10 text-[#602E31] flex items-center justify-center shrink-0">
                   <Leaf className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-mono text-[#626F64] tracking-wider block">
+                  <span className="text-[10px] uppercase font-mono text-[#7E6568] tracking-wider block">
                     Dietary
                   </span>
-                  <span className="text-xs font-serif font-bold text-[#182019] truncate block">
+                  <span className="text-xs font-serif font-bold text-[#241416] truncate block">
                     {dish.dietaryTags.length > 0 ? dish.dietaryTags[0].replace('_', ' ') : 'Fresh Harvest'}
                   </span>
                 </div>
@@ -344,10 +344,10 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
                       key={tag}
                       className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${
                         isVeg
-                          ? 'bg-[#E4ECE5] text-[#31543A] border-[#DDD9CB]'
+                          ? 'bg-[#602E31]/10 text-[#602E31] border-[#E8D9CC]'
                           : tag === 'SIGNATURE'
-                          ? 'bg-[#C97852]/15 text-[#C97852] border-[#C97852]/30 font-bold'
-                          : 'bg-[#F7F4EC] text-[#3A453C] border-[#DDD9CB]'
+                          ? 'bg-[#C2674F]/15 text-[#C2674F] border-[#C2674F]/30 font-bold'
+                          : 'bg-[#FAF2EA] text-[#3A453C] border-[#E8D9CC]'
                       }`}
                     >
                       {isVeg && <Leaf className="w-2.5 h-2.5" />}
@@ -359,20 +359,20 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
             )}
 
             {/* ── INGREDIENTS Section ── */}
-            <div className="p-3.5 rounded-2xl bg-[#FAF8F3] border border-[#DDD9CB] flex items-start gap-3">
-              <div className="w-7 h-7 rounded-lg bg-[#31543A]/10 text-[#31543A] flex items-center justify-center shrink-0 mt-0.5">
+            <div className="p-3.5 rounded-2xl bg-[#FAF2EA] border border-[#E8D9CC] flex items-start gap-3">
+              <div className="w-7 h-7 rounded-lg bg-[#602E31]/10 text-[#602E31] flex items-center justify-center shrink-0 mt-0.5">
                 <Utensils className="w-4 h-4" />
               </div>
               <div className="space-y-0.5 text-xs font-sans">
-                <span className="font-serif font-bold text-[#182019] block">Artisanal Ingredients</span>
-                <p className="text-[#626F64] leading-relaxed">
+                <span className="font-serif font-bold text-[#241416] block">Artisanal Ingredients</span>
+                <p className="text-[#7E6568] leading-relaxed">
                   Crafted fresh using prime market harvest, estate cold-pressed oils, and bespoke stone-ground house seasonings.
                 </p>
               </div>
             </div>
 
             {/* ── ALLERGENS Section ── */}
-            <div className="p-3.5 rounded-2xl bg-[#FCEBE9] border border-[#DDD9CB] flex items-start gap-3 text-[#A8382B]">
+            <div className="p-3.5 rounded-2xl bg-[#FCEBE9] border border-[#E8D9CC] flex items-start gap-3 text-[#A8382B]">
               <div className="w-7 h-7 rounded-lg bg-[#A8382B]/10 text-[#A8382B] flex items-center justify-center shrink-0 mt-0.5">
                 <ShieldAlert className="w-4 h-4" />
               </div>
@@ -387,13 +387,13 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
             </div>
 
             {/* ── SPICE LEVEL Section ── */}
-            <div className="p-3.5 rounded-2xl bg-[#FAF8F3] border border-[#DDD9CB] flex items-start gap-3">
-              <div className="w-7 h-7 rounded-lg bg-[#C97852]/10 text-[#C97852] flex items-center justify-center shrink-0 mt-0.5">
+            <div className="p-3.5 rounded-2xl bg-[#FAF2EA] border border-[#E8D9CC] flex items-start gap-3">
+              <div className="w-7 h-7 rounded-lg bg-[#C2674F]/10 text-[#C2674F] flex items-center justify-center shrink-0 mt-0.5">
                 <Flame className="w-4 h-4" />
               </div>
               <div className="space-y-0.5 text-xs font-sans">
-                <span className="font-serif font-bold text-[#182019] block">Spice Calibration</span>
-                <p className="text-[#626F64] leading-relaxed">
+                <span className="font-serif font-bold text-[#241416] block">Spice Calibration</span>
+                <p className="text-[#7E6568] leading-relaxed">
                   {spiceLevelLabel}
                 </p>
               </div>
@@ -401,14 +401,14 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
 
             {/* ── MODIFIERS Section ── */}
             {dish.modifiers && dish.modifiers.length > 0 && (
-              <div className="space-y-3 pt-3 border-t border-[#DDD9CB]">
-                <h4 className="font-serif text-xs font-bold text-[#182019] tracking-wider uppercase">
+              <div className="space-y-3 pt-3 border-t border-[#E8D9CC]">
+                <h4 className="font-serif text-xs font-bold text-[#241416] tracking-wider uppercase">
                   Customizations
                 </h4>
                 {dish.modifiers.map((mod) => (
                   <div key={mod.id} className="space-y-2">
-                    <p className="text-xs text-[#626F64] font-medium">
-                      {mod.title} {mod.required && <span className="text-[#31543A] font-bold">*</span>}
+                    <p className="text-xs text-[#7E6568] font-medium">
+                      {mod.title} {mod.required && <span className="text-[#602E31] font-bold">*</span>}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {mod.options.map((opt) => {
@@ -422,12 +422,12 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
                             onClick={() => handleModifierToggle(mod.title, opt.name, opt.price, mod.required)}
                             className={`p-2.5 rounded-xl border text-left text-xs flex justify-between items-center transition-all cursor-pointer ${
                               isSelected
-                                ? 'border-[#31543A] bg-[#31543A]/10 text-[#182019] font-semibold ring-1 ring-[#31543A]'
-                                : 'border-[#DDD9CB] bg-[#F7F4EC] text-[#3A453C] hover:border-[#31543A]/40 hover:text-[#182019]'
+                                ? 'border-[#602E31] bg-[#602E31]/10 text-[#241416] font-semibold ring-1 ring-[#602E31]'
+                                : 'border-[#E8D9CC] bg-[#FAF2EA] text-[#3A453C] hover:border-[#602E31]/40 hover:text-[#241416]'
                             }`}
                           >
                             <span>{opt.name}</span>
-                            <span className="text-[#31543A] font-mono font-bold">
+                            <span className="text-[#602E31] font-mono font-bold">
                               {opt.price > 0 ? `+${formatPrice(opt.price)}` : 'Included'}
                             </span>
                           </button>
@@ -441,22 +441,22 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
           </div>
 
           {/* ── STICKY BOTTOM ACTION BAR ── */}
-          <div className="p-4 sm:p-5 border-t border-[#DDD9CB] bg-white flex items-center justify-between gap-3 shrink-0">
-            <div className="flex items-center gap-2.5 bg-[#F7F4EC] p-1.5 rounded-full border border-[#DDD9CB]">
+          <div className="p-4 sm:p-5 border-t border-[#E8D9CC] bg-white flex items-center justify-between gap-3 shrink-0">
+            <div className="flex items-center gap-2.5 bg-[#FAF2EA] p-1.5 rounded-full border border-[#E8D9CC]">
               <button
                 type="button"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 aria-label="Decrease quantity"
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[#626F64] hover:text-[#182019] hover:bg-white transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#7E6568] hover:text-[#241416] hover:bg-white transition-colors cursor-pointer"
               >
                 <Minus className="w-3.5 h-3.5" />
               </button>
-              <span className="font-serif font-bold text-sm px-2 text-[#182019]">{quantity}</span>
+              <span className="font-serif font-bold text-sm px-2 text-[#241416]">{quantity}</span>
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
                 aria-label="Increase quantity"
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[#626F64] hover:text-[#182019] hover:bg-white transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#7E6568] hover:text-[#241416] hover:bg-white transition-colors cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
               </button>
@@ -469,15 +469,15 @@ export const DishDetailModal: React.FC<DishDetailModalProps> = ({
               onClick={handleAddToCart}
               className={`flex-1 sm:flex-initial sm:min-w-[200px] px-6 py-3.5 rounded-xl font-sans font-bold text-xs uppercase tracking-widest transition-all shadow-xs border cursor-pointer min-h-[44px] flex items-center justify-center gap-2 ${
                 isAdded
-                  ? 'bg-[#182019] text-[#78956A] border-[#78956A]'
+                  ? 'bg-[#241416] text-[#C2674F] border-[#C2674F]'
                   : dish.isAvailable
-                  ? 'bg-[#31543A] hover:bg-[#26432E] text-white border-[#26432E]'
-                  : 'bg-[#F7F4EC] text-[#626F64] border-[#DDD9CB] cursor-not-allowed'
+                  ? 'bg-[#602E31] hover:bg-[#4D2326] text-white border-[#4D2326]'
+                  : 'bg-[#FAF2EA] text-[#7E6568] border-[#E8D9CC] cursor-not-allowed'
               }`}
             >
               {isAdded ? (
                 <>
-                  <Check className="w-4 h-4 text-[#78956A]" />
+                  <Check className="w-4 h-4 text-[#C2674F]" />
                   <span>Added To Order</span>
                 </>
               ) : dish.isAvailable ? (

@@ -34,8 +34,8 @@ export const DishDetailPage: React.FC = () => {
   if (!dish) {
     return (
       <div className="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
-        <h2 className="font-serif text-2xl font-bold text-[#182019]">Dish Not Found</h2>
-        <Link to="/menu" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-colors">
+        <h2 className="font-serif text-2xl font-bold text-[#241416]">Dish Not Found</h2>
+        <Link to="/menu" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold text-xs uppercase tracking-wider shadow-sm transition-colors">
           Return to Menu
         </Link>
       </div>
@@ -70,18 +70,18 @@ export const DishDetailPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-12 text-[#182019]">
-      <MetaTags title={`${dish.name} | Aura`} />
+    <div className="max-w-5xl mx-auto px-4 py-10 space-y-12 text-[#241416]">
+      <MetaTags title={`${dish.name} | Tronx`} />
 
-      <Link to="/menu" className="inline-flex items-center gap-2 text-xs text-[#31543A] hover:underline font-mono uppercase tracking-widest font-bold">
+      <Link to="/menu" className="inline-flex items-center gap-2 text-xs text-[#602E31] hover:underline font-mono uppercase tracking-widest font-bold">
         <ArrowLeft className="w-4 h-4" /> Back to Menu
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         {/* Media */}
-        <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-white border border-[#DDD9CB] shadow-sm">
+        <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-white border border-[#E8D9CC] shadow-sm">
           <img src={dish.mediaUrl} alt={dish.name} className="w-full h-full object-cover" />
-          <div className="absolute top-4 right-4 px-4 py-1.5 rounded-full bg-white/95 text-[#31543A] font-mono font-bold text-base border border-[#DDD9CB] shadow-sm">
+          <div className="absolute top-4 right-4 px-4 py-1.5 rounded-full bg-white/95 text-[#602E31] font-mono font-bold text-base border border-[#E8D9CC] shadow-sm">
             {formatPrice(unitPrice)}
           </div>
         </div>
@@ -89,13 +89,13 @@ export const DishDetailPage: React.FC = () => {
         {/* Info & Modifiers */}
         <div className="space-y-6">
           <div className="space-y-2">
-            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#182019]">{dish.name}</h1>
-            <p className="text-[#3A453C] text-sm leading-relaxed font-sans">{dish.description}</p>
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#241416]">{dish.name}</h1>
+            <p className="text-[#533B3D] text-sm leading-relaxed font-sans">{dish.description}</p>
           </div>
 
-          <div className="flex flex-wrap gap-4 text-xs text-[#626F64] py-3 border-y border-[#DDD9CB]">
+          <div className="flex flex-wrap gap-4 text-xs text-[#7E6568] py-3 border-y border-[#E8D9CC]">
             {dish.calories && (
-              <span className="flex items-center gap-1.5 text-[#31543A] font-mono font-semibold">
+              <span className="flex items-center gap-1.5 text-[#602E31] font-mono font-semibold">
                 <Flame className="w-4 h-4" /> {dish.calories} calories
               </span>
             )}
@@ -109,14 +109,14 @@ export const DishDetailPage: React.FC = () => {
           {/* Modifiers Selection */}
           {dish.modifiers && dish.modifiers.length > 0 && (
             <div className="space-y-4 pt-2">
-              <h4 className="font-serif text-sm font-bold text-[#182019] uppercase tracking-wider">
+              <h4 className="font-serif text-sm font-bold text-[#241416] uppercase tracking-wider">
                 Custom Preparation Options
               </h4>
               {dish.modifiers.map((mod) => (
                 <div key={mod.id} className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-semibold text-[#182019]">
+                  <div className="flex items-center justify-between text-xs font-semibold text-[#241416]">
                     <span>{mod.title}</span>
-                    {mod.required && <span className="text-[10px] text-[#31543A] uppercase font-mono font-bold">(Required)</span>}
+                    {mod.required && <span className="text-[10px] text-[#602E31] uppercase font-mono font-bold">(Required)</span>}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {mod.options.map((opt) => {
@@ -130,12 +130,12 @@ export const DishDetailPage: React.FC = () => {
                           onClick={() => handleModifierToggle(mod.title, opt.name, opt.price, mod.required)}
                           className={`p-3 rounded-xl text-xs flex items-center justify-between border transition-all cursor-pointer ${
                             isSelected
-                              ? 'bg-[#FAF8F3] border-[#31543A] text-[#182019] font-semibold ring-1 ring-[#31543A]'
-                              : 'bg-white border-[#DDD9CB] text-[#626F64] hover:border-[#31543A]/40 hover:text-[#182019]'
+                              ? 'bg-[#FAF2EA] border-[#602E31] text-[#241416] font-semibold ring-1 ring-[#602E31]'
+                              : 'bg-white border-[#E8D9CC] text-[#7E6568] hover:border-[#602E31]/40 hover:text-[#241416]'
                           }`}
                         >
                           <span>{opt.name}</span>
-                          {opt.price > 0 && <span className="font-mono text-[#31543A] font-bold">+{formatPrice(opt.price)}</span>}
+                          {opt.price > 0 && <span className="font-mono text-[#602E31] font-bold">+{formatPrice(opt.price)}</span>}
                         </button>
                       );
                     })}
@@ -146,13 +146,13 @@ export const DishDetailPage: React.FC = () => {
           )}
 
           {/* Add to Cart Actions */}
-          <div className="pt-6 border-t border-[#DDD9CB] flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex items-center border border-[#DDD9CB] rounded-xl overflow-hidden bg-white shadow-xs">
-              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="px-4 py-2.5 text-[#626F64] hover:text-[#182019] hover:bg-[#FAF8F3] cursor-pointer transition-colors" aria-label="Decrease quantity">
+          <div className="pt-6 border-t border-[#E8D9CC] flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex items-center border border-[#E8D9CC] rounded-xl overflow-hidden bg-white shadow-xs">
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="px-4 py-2.5 text-[#7E6568] hover:text-[#241416] hover:bg-[#FAF2EA] cursor-pointer transition-colors" aria-label="Decrease quantity">
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="px-4 font-mono font-bold text-sm text-[#182019]">{quantity}</span>
-              <button onClick={() => setQuantity((q) => q + 1)} className="px-4 py-2.5 text-[#626F64] hover:text-[#182019] hover:bg-[#FAF8F3] cursor-pointer transition-colors" aria-label="Increase quantity">
+              <span className="px-4 font-mono font-bold text-sm text-[#241416]">{quantity}</span>
+              <button onClick={() => setQuantity((q) => q + 1)} className="px-4 py-2.5 text-[#7E6568] hover:text-[#241416] hover:bg-[#FAF2EA] cursor-pointer transition-colors" aria-label="Increase quantity">
                 <Plus className="w-4 h-4" />
               </button>
             </div>
@@ -161,13 +161,13 @@ export const DishDetailPage: React.FC = () => {
               onClick={handleAddToCart}
               className={`w-full sm:flex-1 min-h-[48px] py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm border ${
                 isAdded
-                  ? 'bg-[#182019] text-[#78956A] border-[#78956A]'
-                  : 'bg-[#31543A] hover:bg-[#26432E] text-white border-[#26432E]'
+                  ? 'bg-[#241416] text-[#C2674F] border-[#C2674F]'
+                  : 'bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] border-[#4D2326]'
               }`}
             >
               {isAdded ? (
                 <>
-                  <Check className="w-4 h-4 text-[#78956A]" /> Added To Order
+                  <Check className="w-4 h-4 text-[#C2674F]" /> Added To Order
                 </>
               ) : (
                 <>

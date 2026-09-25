@@ -45,11 +45,11 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 py-16">
-      <MetaTags title="Guest Login | Aura" />
-      <div className="bg-white p-8 rounded-3xl space-y-6 border border-[#DDD9CB] shadow-sm">
+      <MetaTags title="Guest Login | Tronx" />
+      <div className="bg-white p-8 rounded-3xl space-y-6 border border-[#E8D9CC] shadow-sm">
         <div className="text-center space-y-2">
-          <h1 className="font-serif text-2xl font-bold text-[#182019]">Guest Login</h1>
-          <p className="text-xs text-[#626F64]">Access your dining history and table reservations</p>
+          <h1 className="font-serif text-2xl font-bold text-[#241416]">Guest Login</h1>
+          <p className="text-xs text-[#7E6568]">Access your dining history and table reservations</p>
         </div>
 
         {errorMsg && (
@@ -61,31 +61,31 @@ export const LoginPage: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
-            <label className="block text-[#182019] mb-1.5 font-semibold">Email Address</label>
+            <label className="block text-[#241416] mb-1.5 font-semibold">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[#626F64] absolute left-3 top-3" />
+              <Mail className="w-4 h-4 text-[#7E6568] absolute left-3 top-3" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="guest@aura.com"
-                className="w-full pl-9 pr-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] focus:border-[#31543A] rounded-xl text-[#182019] placeholder-[#626F64]/50 outline-none transition-colors"
+                placeholder="guest@tronx.com"
+                className="w-full pl-9 pr-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] focus:border-[#602E31] rounded-xl text-[#241416] placeholder-[#7E6568]/50 outline-none transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[#182019] mb-1.5 font-semibold">Password</label>
+            <label className="block text-[#241416] mb-1.5 font-semibold">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-[#626F64] absolute left-3 top-3" />
+              <Lock className="w-4 h-4 text-[#7E6568] absolute left-3 top-3" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-9 pr-4 py-2.5 bg-[#FAF8F3] border border-[#DDD9CB] focus:border-[#31543A] rounded-xl text-[#182019] placeholder-[#626F64]/50 outline-none transition-colors"
+                className="w-full pl-9 pr-4 py-2.5 bg-[#FAF2EA] border border-[#E8D9CC] focus:border-[#602E31] rounded-xl text-[#241416] placeholder-[#7E6568]/50 outline-none transition-colors"
               />
             </div>
           </div>
@@ -93,7 +93,7 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full min-h-[44px] py-3 rounded-xl bg-[#31543A] hover:bg-[#26432E] text-white font-bold uppercase tracking-wider text-xs shadow-sm disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer transition-colors"
+            className="w-full min-h-[44px] py-3 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold uppercase tracking-wider text-xs shadow-sm disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer transition-colors"
           >
             {isSubmitting ? (
               <>
@@ -105,11 +105,11 @@ export const LoginPage: React.FC = () => {
           </button>
         </form>
 
-        <div className="text-center text-xs text-[#626F64] pt-2 flex justify-between">
-          <Link to="/forgot-password" className="hover:text-[#182019] transition-colors">
+        <div className="text-center text-xs text-[#7E6568] pt-2 flex justify-between">
+          <Link to="/forgot-password" className="hover:text-[#241416] transition-colors">
             Forgot Password?
           </Link>
-          <Link to="/register" className="text-[#31543A] hover:text-[#26432E] font-semibold transition-colors">
+          <Link to="/register" className="text-[#602E31] hover:text-[#4D2326] font-semibold transition-colors">
             Create Account
           </Link>
         </div>

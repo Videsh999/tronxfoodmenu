@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface CraftslandLogoProps {
+export interface CraftslandLogoProps {
   variant?: 'primary' | 'monogram' | 'light' | 'dark' | 'compact' | 'burgundy' | 'burgundy-invert' | 'navy' | 'teal' | 'green' | 'fresh' | 'green-invert';
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -18,84 +18,83 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
     xl: { crest: 'w-20 h-20', title: 'text-5xl', tag: 'text-xs' },
   };
 
-  let primaryColor = '#31543A';
-  let titleColor = 'text-[#182019]';
-  let tagColor = 'text-[#78956A]';
+  // Color mappings based on the organic wine (#602E31) & warm ivory (#FFF5EC) theme
+  let stoneBg = '#602E31';
+  let profileCutout = '#FFF5EC';
+  let titleColor = 'text-[#241416]';
+  let tagColor = 'text-[#B86268]';
 
-  if (variant === 'green' || variant === 'fresh' || variant === 'primary') {
-    primaryColor = '#31543A';
-    titleColor = 'text-[#182019]';
-    tagColor = 'text-[#78956A]';
-  } else if (variant === 'green-invert') {
-    primaryColor = '#78956A';
-    titleColor = 'text-[#F7F4EC]';
-    tagColor = 'text-[#78956A]';
-  } else if (variant === 'burgundy') {
-    primaryColor = '#C97852';
-    titleColor = 'text-[#182019]';
-    tagColor = 'text-[#C97852]';
-  } else if (variant === 'burgundy-invert') {
-    primaryColor = '#C97852';
-    titleColor = 'text-[#F7F4EC]';
-    tagColor = 'text-[#C97852]';
-  } else if (variant === 'navy') {
-    primaryColor = '#31543A';
-    titleColor = 'text-[#182019]';
-    tagColor = 'text-[#78956A]';
-  } else if (variant === 'teal') {
-    primaryColor = '#31543A';
-    titleColor = 'text-[#182019]';
-    tagColor = 'text-[#78956A]';
-  } else if (variant === 'dark') {
-    primaryColor = '#78956A';
-    titleColor = 'text-white';
-    tagColor = 'text-[#78956A]';
+  if (variant === 'green-invert' || variant === 'burgundy-invert' || variant === 'dark') {
+    stoneBg = '#FFF5EC';
+    profileCutout = '#602E31';
+    titleColor = 'text-[#FFF5EC]';
+    tagColor = 'text-[#E8D9CC]';
+  } else if (variant === 'burgundy' || variant === 'green' || variant === 'fresh' || variant === 'primary' || variant === 'navy' || variant === 'teal') {
+    stoneBg = '#602E31';
+    profileCutout = '#FFF5EC';
+    titleColor = 'text-[#241416]';
+    tagColor = 'text-[#602E31]';
   } else if (variant === 'light') {
-    primaryColor = '#182019';
-    titleColor = 'text-[#182019]';
-    tagColor = 'text-[#31543A]';
+    stoneBg = '#241416';
+    profileCutout = '#FFF5EC';
+    titleColor = 'text-[#241416]';
+    tagColor = 'text-[#602E31]';
   }
 
-  // Vector Leaf & C Emblem
+  // Sculpted Moai Monolith Silhouette Emblem directly inspired by the brand reference image
   const Emblem = (
     <div className={`relative flex items-center justify-center shrink-0 ${sizeMap[size].crest}`}>
       <svg
         viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
+        className="w-full h-full drop-shadow-xs"
       >
+        {/* Organic rounded stone block */}
+        <rect
+          x="4"
+          y="4"
+          width="56"
+          height="56"
+          rx="15"
+          fill={stoneBg}
+        />
+        {/* Subtle stone texture perimeter stroke */}
+        <rect
+          x="5"
+          y="5"
+          width="54"
+          height="54"
+          rx="14"
+          stroke={profileCutout}
+          strokeWidth="1"
+          strokeOpacity="0.18"
+        />
+        {/* Sculpted Profile Negative Space Silhouette */}
+        {/* Eye/Brow, straight sculpted Moai nose, lips, defined jaw and chin */}
+        <path
+          d="M34 16
+             C29 16 26 19 26 23
+             C26 25 27 26.5 27 28
+             L20 36
+             H27
+             V40
+             C27 41.5 28 42 29 42
+             L27 44.5
+             C27 46 28.5 47 30 47
+             H33
+             C35.5 47 37 45 37 42
+             V22
+             C37 18 36 16 34 16Z"
+          fill={profileCutout}
+        />
+        {/* Monolith Eye Aperture */}
         <circle
-          cx="32"
-          cy="32"
-          r="29"
-          stroke={primaryColor}
-          strokeWidth="1.75"
-          strokeOpacity="0.8"
-        />
-        <circle
-          cx="32"
-          cy="32"
-          r="26"
-          stroke={primaryColor}
-          strokeWidth="0.8"
-          strokeDasharray="2 2"
-          strokeOpacity="0.5"
-        />
-        <path
-          d="M42 22.5C39.5 18.5 35 16.5 30.5 17C22.5 17.8 17 24.2 17 32C17 39.8 22.8 46.2 30.8 47C36 47.5 41 44.5 43 40C43.5 38.8 42.4 37.8 41.2 38.3C38.2 39.8 34.5 40 31.5 38.5C26 35.8 24.5 29.5 27.5 24C29.5 20.5 33.5 19 37.2 20.2C38.5 20.6 39.8 21.4 41 22.8C41.8 23.7 42.8 23.8 43.2 22.8C43.4 22.3 42.8 21.5 42 22.5Z"
-          fill={primaryColor}
-        />
-        <path
-          d="M34 22.5C38 20.5 44.5 21.5 47.5 25.5C45.5 28 41.5 30 36.5 28.5C35.2 26 34 24 34 22.5Z"
-          fill={primaryColor}
-          opacity="0.95"
-        />
-        <path
-          d="M36 28C40 25 44 23.5 47.5 25.5"
-          stroke="#FFFFFF"
-          strokeWidth="0.8"
-          strokeLinecap="round"
+          cx="31"
+          cy="23"
+          r="1.75"
+          fill={stoneBg}
+          opacity="0.9"
         />
       </svg>
     </div>
@@ -114,12 +113,12 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
       {Emblem}
       <div className="flex flex-col justify-center">
         <span
-          className={`font-serif font-bold tracking-[0.18em] leading-none uppercase ${titleColor} ${sizeMap[size].title}`}
+          className={`font-serif font-bold tracking-[0.22em] leading-none uppercase ${titleColor} ${sizeMap[size].title}`}
         >
-          AURA
+          TRONX
         </span>
         <span
-          className={`font-sans tracking-[0.24em] font-semibold uppercase mt-1 ${tagColor} ${sizeMap[size].tag}`}
+          className={`font-sans tracking-[0.26em] font-semibold uppercase mt-1 ${tagColor} ${sizeMap[size].tag}`}
         >
           Good Food Brighter Moods
         </span>
@@ -127,3 +126,5 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
     </div>
   );
 };
+
+export const TronxLogo = CraftslandLogo;

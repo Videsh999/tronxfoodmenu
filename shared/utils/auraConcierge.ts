@@ -155,7 +155,7 @@ export function queryAuraConcierge(
   ) {
     const signatures = allDishes.filter((d) => d.dietaryTags.includes('SIGNATURE') || d.featured);
     return {
-      text: 'The Aura Signature Harvest represents our kitchen’s pinnacle creations — each dish seasoned with heritage spices and flame-grilled over live coals:',
+      text: 'The Tronx Signature Harvest represents our kitchen’s pinnacle creations — each dish seasoned with heritage spices and flame-grilled over live coals:',
       dishes: signatures.slice(0, 4),
     };
   }
@@ -172,7 +172,7 @@ export function queryAuraConcierge(
       .filter((d) => d.price <= 500)
       .sort((a, b) => a.price - b.price);
     return {
-      text: `Fine dining meets remarkable value at Aura. We offer ${under500.length} handcrafted culinary creations priced at or under ₹500:`,
+      text: `Fine dining meets remarkable value at Tronx. We offer ${under500.length} handcrafted culinary creations priced at or under ₹500:`,
       dishes: under500.slice(0, 4),
     };
   }
@@ -332,7 +332,7 @@ export function queryAuraConcierge(
 
   if (matches.length > 0) {
     return {
-      text: `Here are authentic Aura culinary selections from our menu matching "${query}":`,
+      text: `Here are authentic Tronx culinary selections from our menu matching "${query}":`,
       dishes: matches.slice(0, 4),
     };
   }
@@ -340,7 +340,7 @@ export function queryAuraConcierge(
   // ── GRACEFUL FALLBACK WHEN NO MATCH & AI BACKEND PENDING ────────────────
   const curatedFallback = allDishes.filter((d) => d.dietaryTags.includes('SIGNATURE') || d.featured);
   return {
-    text: 'AURA is taking a moment. Here are some menu options I can recommend right now:',
+    text: 'TRONX is taking a moment. Here are some menu options I can recommend right now:',
     dishes: curatedFallback.length > 0 ? curatedFallback.slice(0, 3) : allDishes.slice(0, 3),
     isFallback: true,
   };

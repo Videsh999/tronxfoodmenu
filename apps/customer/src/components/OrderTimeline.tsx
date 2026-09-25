@@ -79,7 +79,7 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
         </div>
         <h3 className="font-serif text-2xl font-bold text-[#A8382B]">Order Cancelled</h3>
         <p className="text-sm font-semibold text-[#A8382B]">Order cancelled</p>
-        <p className="text-xs text-[#626F64] max-w-sm mx-auto">
+        <p className="text-xs text-[#7E6568] max-w-sm mx-auto">
           This culinary order was cancelled. If you believe this is an error or wish to modify your order, please contact our concierge.
         </p>
       </div>
@@ -94,11 +94,11 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
       {/* Step Indicators Bar (Horizontal Desktop & Compact) */}
       <div className="relative flex items-center justify-between max-w-2xl mx-auto px-2 sm:px-4">
         {/* Background Line */}
-        <div className="absolute top-5 left-8 right-8 h-0.5 bg-[#DDD9CB] -z-10" />
+        <div className="absolute top-5 left-8 right-8 h-0.5 bg-[#E8D9CC] -z-10" />
         
         {/* Active Progress Line */}
         <motion.div
-          className="absolute top-5 left-8 -z-10 h-0.5 bg-[#31543A]"
+          className="absolute top-5 left-8 -z-10 h-0.5 bg-[#602E31]"
           initial={{ width: '0%' }}
           animate={{
             width: `${Math.min(100, Math.max(0, (currentIndex / (steps.length - 1)) * 100))}%`,
@@ -120,7 +120,7 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
                     initial={{ scale: 0.9, opacity: 0.6 }}
                     animate={{ scale: 1.55, opacity: 0 }}
                     transition={{ repeat: Infinity, duration: 2.0, ease: 'easeOut' }}
-                    className="absolute inset-0 rounded-full bg-[#31543A]/30 pointer-events-none"
+                    className="absolute inset-0 rounded-full bg-[#602E31]/30 pointer-events-none"
                   />
                 )}
                 <motion.div
@@ -130,10 +130,10 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
                   }}
                   className={`relative w-10 h-10 rounded-full flex items-center justify-center border transition-all ${
                     isDone
-                      ? 'bg-[#31543A] border-[#31543A] text-white shadow-xs'
+                      ? 'bg-[#602E31] border-[#602E31] text-white shadow-xs'
                       : isCurrent
-                      ? 'bg-white border-2 border-[#31543A] text-[#31543A] ring-4 ring-[#31543A]/15 shadow-xs'
-                      : 'bg-[#FAF8F3] border border-[#DDD9CB] text-[#626F64]/40'
+                      ? 'bg-white border-2 border-[#602E31] text-[#602E31] ring-4 ring-[#602E31]/15 shadow-xs'
+                      : 'bg-[#FAF2EA] border border-[#E8D9CC] text-[#7E6568]/40'
                   }`}
                 >
                   {isDone ? <CheckCircle2 className="w-5 h-5" /> : <StepIcon className="w-5 h-5" />}
@@ -141,23 +141,23 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
               </div>
 
               <div className="mt-2 text-center">
-                <p className={`text-[10px] sm:text-[11px] font-bold leading-tight ${isCurrent ? 'text-[#31543A]' : isDone ? 'text-[#182019]' : 'text-[#626F64]/40'}`}>
+                <p className={`text-[10px] sm:text-[11px] font-bold leading-tight ${isCurrent ? 'text-[#602E31]' : isDone ? 'text-[#241416]' : 'text-[#7E6568]/40'}`}>
                   {step.label}
                 </p>
                 <div className="mt-1">
                   {isDone && (
-                    <span className="text-[9px] sm:text-[10px] font-semibold text-[#31543A] inline-flex items-center justify-center gap-0.5">
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-[#602E31] inline-flex items-center justify-center gap-0.5">
                       ✓ Done
                     </span>
                   )}
                   {isCurrent && (
-                    <span className="text-[9px] sm:text-[10px] font-bold text-[#31543A] inline-flex items-center justify-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#31543A] animate-ping" />
+                    <span className="text-[9px] sm:text-[10px] font-bold text-[#602E31] inline-flex items-center justify-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#602E31] animate-ping" />
                       ● Current Status
                     </span>
                   )}
                   {isUpcoming && (
-                    <span className="text-[9px] sm:text-[10px] text-[#626F64]/40 inline-flex items-center justify-center">
+                    <span className="text-[9px] sm:text-[10px] text-[#7E6568]/40 inline-flex items-center justify-center">
                       ○ Upcoming
                     </span>
                   )}
@@ -174,16 +174,16 @@ export const OrderTimeline: React.FC<OrderTimelineProps> = ({ orderStatus, order
         initial={{ opacity: 0, y: 8, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="bg-white p-5 sm:p-6 rounded-2xl border border-[#DDD9CB] text-center space-y-2 max-w-lg mx-auto shadow-xs"
+        className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E8D9CC] text-center space-y-2 max-w-lg mx-auto shadow-xs"
       >
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#31543A]/10 text-[#31543A] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
-          <span className="w-2 h-2 rounded-full bg-[#31543A] animate-ping" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#602E31]/10 text-[#602E31] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
+          <span className="w-2 h-2 rounded-full bg-[#602E31] animate-ping" />
           ● Current Status
         </div>
-        <h3 className="font-serif text-2xl font-bold text-[#182019]">
+        <h3 className="font-serif text-2xl font-bold text-[#241416]">
           {steps[currentIndex]?.label || orderStatus}
         </h3>
-        <p className="text-sm font-semibold text-[#31543A]">
+        <p className="text-sm font-semibold text-[#602E31]">
           {STATUS_MESSAGES[orderStatus] || steps[currentIndex]?.sublabel}
         </p>
       </motion.div>

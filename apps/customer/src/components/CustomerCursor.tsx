@@ -77,22 +77,22 @@ export const CustomerCursor: React.FC = () => {
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${ringScale})`;
         if (isHovering) {
-          ringRef.current.style.borderColor = '#E5B869';
-          ringRef.current.style.backgroundColor = 'rgba(229, 184, 105, 0.1)';
-          ringRef.current.style.boxShadow = '0 0 16px rgba(229, 184, 105, 0.4)';
+          ringRef.current.style.borderColor = '#602E31';
+          ringRef.current.style.backgroundColor = 'rgba(96, 46, 49, 0.12)';
+          ringRef.current.style.boxShadow = '0 0 16px rgba(96, 46, 49, 0.4)';
         } else {
-          ringRef.current.style.borderColor = 'rgba(229, 184, 105, 0.65)';
-          ringRef.current.style.backgroundColor = 'rgba(229, 184, 105, 0.03)';
-          ringRef.current.style.boxShadow = '0 0 10px rgba(229, 184, 105, 0.2)';
+          ringRef.current.style.borderColor = 'rgba(96, 46, 49, 0.65)';
+          ringRef.current.style.backgroundColor = 'rgba(96, 46, 49, 0.04)';
+          ringRef.current.style.boxShadow = '0 0 10px rgba(96, 46, 49, 0.2)';
         }
       }
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%) scale(${dotScale})`;
-        dotRef.current.style.backgroundColor = isHovering ? '#F7F4EC' : '#E5B869';
+        dotRef.current.style.backgroundColor = isHovering ? '#FFF5EC' : '#602E31';
         dotRef.current.style.boxShadow = isHovering
-          ? '0 0 10px rgba(247, 244, 236, 0.8)'
-          : '0 0 6px rgba(229, 184, 105, 0.6)';
+          ? '0 0 10px rgba(255, 245, 236, 0.8)'
+          : '0 0 6px rgba(96, 46, 49, 0.6)';
       }
 
       rafId = requestAnimationFrame(updateCursor);
@@ -125,23 +125,25 @@ export const CustomerCursor: React.FC = () => {
       className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden select-none"
       style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.2s ease' }}
     >
-      {/* 1. Outer Ring: Thin delicate outline with lag and gold glow */}
+      {/* 1. Outer Ring: Thin delicate outline with lag and wine glow */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-[#E5B869]/65 transition-[border-color,background-color,box-shadow] duration-200 pointer-events-none will-change-transform"
+        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-[#602E31]/65 transition-[border-color,background-color,box-shadow] duration-200 pointer-events-none will-change-transform"
         style={{
-          boxShadow: '0 0 10px rgba(229, 184, 105, 0.2)',
+          boxShadow: '0 0 10px rgba(96, 46, 49, 0.2)',
         }}
       />
 
-      {/* 2. Inner Dot: Solid precision dot */}
+      {/* 2. Inner Dot: Solid precision wine dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#E5B869] pointer-events-none will-change-transform"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#602E31] pointer-events-none will-change-transform"
         style={{
-          boxShadow: '0 0 6px rgba(229, 184, 105, 0.6)',
+          boxShadow: '0 0 6px rgba(96, 46, 49, 0.6)',
         }}
       />
     </div>
   );
 };
+
+export const TronxCursor = CustomerCursor;

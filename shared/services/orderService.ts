@@ -126,7 +126,7 @@ export class OrderService {
       tip_amount: payload.tipAmount || 0.00,
       guest_info: {
         name: payload.customerName || 'Distinguished Guest',
-        email: payload.customerEmail || 'guest@craftsland.com',
+        email: payload.customerEmail || 'guest@tronx.com',
       },
       items: payload.items.map((item) => ({
         dish_id: item.dishId,
