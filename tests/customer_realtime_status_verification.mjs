@@ -1,11 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import fs from 'node:fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+const envPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(envPath) && typeof process.loadEnvFile === 'function') {
+  process.loadEnvFile(envPath);
+}
 
 const SUPABASE_URL = 'https://yrlvoafajwnpmbuknupu.supabase.co';
 const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlybHZvYWZhanducG1idWtudXB1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMTA4ODYsImV4cCI6MjEwNDc4Njg4Nn0.UVqSGe8n8RFHb6PIzDmSoV4KPjuNwI203SRgpFGL9Bg';
