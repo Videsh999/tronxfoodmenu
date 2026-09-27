@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  Heart,
-  Leaf,
-  ChefHat,
   Sparkles,
   Flame,
-  Utensils,
+  Search,
   Calendar,
-  Quote,
+  Play,
+  X,
+  ChefHat,
+  Filter,
+  Utensils,
 } from 'lucide-react';
 import { MetaTags } from '@shared/components/MetaTags';
-import { RESTAURANT_BRAND, SEATING_SECTIONS } from '@shared/config/constants';
+import { SEATING_SECTIONS } from '@shared/config/constants';
 import { useMenu } from '@shared/hooks/useMenu';
+import { formatPrice } from '@shared/utils/formatters';
 import { DishCard } from '../components/DishCard';
 import { DishDetailModal } from '../components/DishDetailModal';
 import { CinematicHero } from '../components/CinematicHero';
@@ -22,84 +23,72 @@ import { ComingSoonMarquee } from '../components/ComingSoonMarquee';
 import type { Dish } from '@shared/types/menu';
 
 export const HomePage: React.FC = () => {
-  const { dishes } = useMenu();
+  const { dishes, categories } = useMenu();
   const [selectedQuickViewDish, setSelectedQuickViewDish] = useState<Dish | null>(null);
 
-  // Featured signature dishes
-  const featuredDishes = dishes.filter((d) => d.featured).slice(0, 6);
+  // PlatePost Filter State
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeDietaryFilter, setActiveDietaryFilter] = useState<string>('ALL');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Four Experience Highlights
-  const pillars = [
-    {
-      title: 'Artisanal Hearth',
-      desc: 'Oak and smoldering embers imparting depth to every dish.',
-      icon: Flame,
-      stat: '100% Fire-Baked',
-    },
-    {
-      title: 'Master Chefs',
-      desc: 'Crafted with obsessive precision and heritage technique.',
-      icon: ChefHat,
-      stat: 'Decades of Mastery',
-    },
-    {
-      title: 'Botanical Purity',
-      desc: 'Locally foraged herbs and organic farm harvests.',
-      icon: Leaf,
-      stat: 'Zero Preservatives',
-    },
-    {
-      title: 'Atmospheric Sanctuaries',
-      desc: 'Warm candlelight, brass accents, and curated sonic ambiance.',
-      icon: Sparkles,
-      stat: '4 Bespoke Salons',
-    },
-  ];
+  // ── TRENDING REEL STORIES (PlatePost signature feature) ──
+  const trendingReels = useMemo(() => {
+    // Select dishes with verified video URLs across key categories
+    const reelSlugs = [
+      'tronx-biryani',
+      'chicken-tikka',
+      'wood-fired-margherita',
+      'creamy-alfredo-pasta',
+      'crispy-chicken-wings',
+      'chocolate-lava-brownie',
+    ];
+    return dishes.filter((d) => reelSlugs.includes(d.slug));
+  }, [dishes]);
 
-  // Real mood discovery mapped directly to authenticated database attributes
-  const moods = [
-    {
-      title: "Chef's Curations",
-      desc: 'Master craft dishes chosen by our culinary team',
-      href: '/menu?tag=CHEFS_CHOICE',
-      icon: ChefHat,
-      count: dishes.filter((d) => d.dietaryTags.includes('CHEFS_CHOICE')).length,
-    },
-    {
-      title: 'Signature Icons',
-      desc: 'Our most celebrated creations plated to perfection',
-      href: '/menu?tag=SIGNATURE',
-      icon: Sparkles,
-      count: dishes.filter((d) => d.dietaryTags.includes('SIGNATURE')).length,
-    },
-    {
-      title: 'Botanical & Fresh',
-      desc: 'Plant-forward garden botanicals and light greens',
-      href: '/menu?tag=VEGAN',
-      icon: Leaf,
-      count: dishes.filter((d) => d.dietaryTags.includes('VEGAN') || d.dietaryTags.includes('VEGETARIAN')).length,
-    },
-    {
-      title: 'Bold & Fiery',
-      desc: 'Artisanal spices with wood-fired heat',
-      href: '/menu?tag=SPICY',
-      icon: Flame,
-      count: dishes.filter((d) => d.dietaryTags.includes('SPICY')).length,
-    },
-    {
-      title: 'Hearty Mains',
-      desc: 'Slow-simmered gravies and flame-seared mains',
-      href: '/menu/mains',
-      icon: Utensils,
-      count: dishes.filter((d) => d.categorySlug === 'mains').length,
-    },
-    {
-      title: 'Something Sweet',
-      desc: 'Artisanal confections and chilled indulgences',
-      href: '/menu/desserts',
-      icon: Heart,
-      count: dishes.filter((d) => d.categorySlug === 'desserts').length,
-    },
+  // ── FILTERED DISHES FOR PLATEPOST VIDEO GRID ──
+  const filteredDishes = useMemo(() => {
+    return dishes.filter((dish) => {
+      // Category filter
+      if (activeCategory !== 'all' && dish.categorySlug !== activeCategory) {
+        return false;
+      }
+
+      // Dietary filter
+      if (activeDietaryFilter === 'VEG') {
+        const isVeg = dish.dietaryTags.some((t) => t === 'VEGETARIAN' || t === 'VEGAN');
+        if (!isVeg) return false;
+      } else if (activeDietaryFilter === 'NON_VEG') {
+        const isVeg = dish.dietaryTags.some((t) => t === 'VEGETARIAN' || t === 'VEGAN');
+        if (isVeg) return false;
+      } else if (activeDietaryFilter === 'CHEFS_CHOICE') {
+        if (!dish.dietaryTags.includes('CHEFS_CHOICE')) return false;
+      } else if (activeDietaryFilter === 'SPICY') {
+        if (!dish.dietaryTags.includes('SPICY')) return false;
+      } else if (activeDietaryFilter === 'SIGNATURE') {
+        if (!dish.dietaryTags.includes('SIGNATURE')) return false;
+      }
+
+      // Search query
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        const matchesName = dish.name.toLowerCase().includes(query);
+        const matchesDesc = dish.description.toLowerCase().includes(query);
+        const matchesTag = dish.dietaryTags.some((t) => t.toLowerCase().includes(query));
+        if (!matchesName && !matchesDesc && !matchesTag) return false;
+      }
+
+      return true;
+    });
+  }, [dishes, activeCategory, activeDietaryFilter, searchQuery]);
+
+  // Dietary Filter Options
+  const dietaryFilters = [
+    { id: 'ALL', label: 'All Dishes', icon: Utensils },
+    { id: 'VEG', label: 'Pure Veg', dot: 'bg-emerald-500' },
+    { id: 'NON_VEG', label: 'Non-Veg', dot: 'bg-rose-500' },
+    { id: 'SIGNATURE', label: 'Signature', icon: Sparkles },
+    { id: 'CHEFS_CHOICE', label: "Chef's Choice", icon: ChefHat },
+    { id: 'SPICY', label: 'Spicy Fire', icon: Flame },
   ];
 
   // Visual photos mapped to the 4 seating sanctuaries
@@ -120,36 +109,11 @@ export const HomePage: React.FC = () => {
     }
   };
 
-  // Editorial Critic Reviews
-  const accolades = [
-    {
-      critic: 'The Epicurean Chronicle',
-      rating: '★★★★★',
-      quote:
-        'A triumph of fire and soul. Tronx delivers an intoxicating balance of intimacy, culinary audacity, and sensory elevation.',
-      author: 'Julian Thorne, Chief Gastronomy Critic',
-    },
-    {
-      critic: 'Michelin Dining Guide Journal',
-      rating: 'Exceptional Distinction',
-      quote:
-        'The wood-fired biryani and stone-baked creations demonstrate a profound command of smoke, aromatic botanicals, and heat calibration.',
-      author: 'Global Culinary Inspectorate',
-    },
-    {
-      critic: 'Vogue Gastronomy',
-      rating: 'Destination of the Year',
-      quote:
-        'From the brass-illuminated Main Dining Sanctuary to the private wine pairings, Tronx is where culinary theater becomes pure poetry.',
-      author: 'Claire Delacroix, Arts & Culture Editor',
-    },
-  ];
-
   return (
     <div className="space-y-0 pb-24 overflow-x-hidden">
       <MetaTags
-        title="Tronx — Good Food Brighter Moods"
-        description="Experience a world of flavors crafted with passion and the freshest ingredients."
+        title="Tronx — Live Video Menu & Artisanal Dining"
+        description="Every dish presented with high-definition culinary video, authentic recipes, and seamless one-click ordering."
       />
 
       {/* ========================================================================= */}
@@ -158,87 +122,265 @@ export const HomePage: React.FC = () => {
       <CinematicHero />
 
       {/* ========================================================================= */}
-      {/* 2. THE FOUR PILLARS / EXPERIENCE SECTION */}
+      {/* 2. PLATEPOST VIDEO STORIES / REELS SPOTLIGHT (Signature Video Feature) */}
       {/* ========================================================================= */}
-      <section id="tronx-discovery-start" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-        <div className="text-center space-y-3 max-w-2xl mx-auto mb-16">
-          <span className="font-sans text-xs font-bold text-[#602E31] tracking-[0.3em] uppercase block">
-            The Tronx Standard
-          </span>
-          <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
-            Four Pillars of Culinary Artistry
-          </h2>
-          <p className="text-[#7E6568] text-xs sm:text-sm font-light leading-relaxed">
-            Every element—from foraged botanicals to our smoldering oak hearth—is calibrated to awaken your senses.
-          </p>
-        </div>
+      <section className="bg-gradient-to-b from-[#FFF5EC] to-white border-b border-[#E8D9CC] py-8 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
+              <h2 className="font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#602E31]">
+                Trending Video Reels
+              </h2>
+              <span className="text-[10px] font-mono text-[#7E6568] bg-[#602E31]/10 px-2 py-0.5 rounded-full font-semibold">
+                Tap to Watch & Order
+              </span>
+            </div>
+            <Link
+              to="/menu"
+              className="text-xs font-bold text-[#602E31] hover:text-[#4D2326] flex items-center gap-1 group"
+            >
+              <span>Full Video Catalog</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-white p-7 sm:p-8 rounded-2xl border border-[#E8D9CC] hover:border-[#602E31] hover:shadow-[0_12px_30px_rgba(96,46,49,0.08)] transition-all duration-300 flex flex-col justify-between space-y-5 text-center group shadow-xs hover:-translate-y-1"
+          {/* Horizontal Reel Stories Row */}
+          <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-3 pt-1 no-scrollbar scroll-smooth">
+            {trendingReels.map((dish) => (
+              <button
+                key={dish.id}
+                type="button"
+                onClick={() => setSelectedQuickViewDish(dish)}
+                className="group flex-shrink-0 flex flex-col items-center text-center space-y-2 cursor-pointer focus:outline-none"
               >
-                <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#602E31]/10 border border-[#602E31]/20 text-[#602E31] flex items-center justify-center mx-auto transition-transform group-hover:scale-110">
-                    <Icon className="w-7 h-7" />
+                {/* Pulsing Gradient Story Ring */}
+                <div className="relative p-[3px] rounded-full bg-gradient-to-tr from-[#602E31] via-[#C2674F] to-[#E8B896] shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-black relative border-2 border-white">
+                    <video
+                      src={dish.videoUrl}
+                      poster={dish.posterUrl || dish.mediaUrl}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-xs flex items-center justify-center text-white shadow-sm group-hover:scale-110 transition-transform">
+                        <Play className="w-3 h-3 fill-white ml-0.5" />
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-serif text-lg font-bold text-[#241416] group-hover:text-[#602E31] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-[#7E6568] text-xs leading-relaxed font-sans">
-                    {item.desc}
-                  </p>
                 </div>
-                <div className="pt-4 border-t border-[#E8D9CC]/50">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-[#C2674F] font-bold">
-                    {item.stat}
+
+                <div className="w-24 text-center">
+                  <span className="font-serif text-xs font-bold text-[#241416] group-hover:text-[#602E31] transition-colors block truncate leading-tight">
+                    {dish.name}
+                  </span>
+                  <span className="text-[10px] font-mono font-semibold text-[#602E31] block">
+                    {formatPrice(dish.price)}
                   </span>
                 </div>
-              </motion.div>
-            );
-          })}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. INTERACTIVE AURA AI SOMMELIER & CONCIERGE SHOWCASE (SHOWSTOPPER) */}
+      {/* 3. PLATEPOST INTERACTIVE VIDEO MENU & 1-TAP ORDERING (MAIN TARGET) */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#241416] via-[#3A181A] to-[#602E31] text-[#FFF5EC] p-8 sm:p-12 lg:p-16 border border-[#602E31]/50 shadow-2xl">
+      <section id="platepost-video-menu" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-10">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E8D9CC] pb-8">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#602E31]/10 text-[#602E31] text-[10px] font-mono uppercase font-bold tracking-widest">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>PlatePost Video-First Experience</span>
+            </div>
+            <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
+              Interactive Live Video Menu
+            </h2>
+            <p className="text-[#7E6568] text-xs sm:text-sm font-light max-w-2xl leading-relaxed">
+              Every dish is paired with high-definition culinary video footage, verified farm-fresh ingredients, and instant 1-tap ordering.
+            </p>
+          </div>
+
+          {/* Quick Dietary Counter Stats */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-mono font-bold text-[#241416] bg-white border border-[#E8D9CC] px-3 py-1.5 rounded-xl shadow-xs">
+              {filteredDishes.length} {filteredDishes.length === 1 ? 'Dish Available' : 'Dishes Available'}
+            </span>
+          </div>
+        </div>
+
+        {/* ── Category Tabs (PlatePost Navigation) ── */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+            <button
+              type="button"
+              onClick={() => setActiveCategory('all')}
+              className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer flex-shrink-0 flex items-center gap-2 ${
+                activeCategory === 'all'
+                  ? 'bg-[#602E31] text-white shadow-md'
+                  : 'bg-white text-[#533B3D] border border-[#E8D9CC] hover:border-[#602E31]'
+              }`}
+            >
+              <span>All Dishes</span>
+              <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                activeCategory === 'all' ? 'bg-white/20 text-white' : 'bg-[#FAF2EA] text-[#7E6568]'
+              }`}>
+                {dishes.length}
+              </span>
+            </button>
+
+            {categories.map((cat) => {
+              const catCount = dishes.filter((d) => d.categorySlug === cat.slug).length;
+              const isActive = activeCategory === cat.slug;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setActiveCategory(cat.slug)}
+                  className={`px-5 py-2.5 rounded-full text-xs font-sans font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer flex-shrink-0 flex items-center gap-2 ${
+                    isActive
+                      ? 'bg-[#602E31] text-white shadow-md'
+                      : 'bg-white text-[#533B3D] border border-[#E8D9CC] hover:border-[#602E31]'
+                  }`}
+                >
+                  <span>{cat.name}</span>
+                  <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                    isActive ? 'bg-white/20 text-white' : 'bg-[#FAF2EA] text-[#7E6568]'
+                  }`}>
+                    {catCount}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* ── Live Search & Dietary Filter Bar ── */}
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pt-2">
+            
+            {/* Search Input */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 text-[#7E6568] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search dishes by name, spice, or ingredients..."
+                className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-[#E8D9CC] text-xs text-[#241416] placeholder:text-[#7E6568]/70 focus:outline-none focus:border-[#602E31] focus:ring-1 focus:ring-[#602E31] shadow-xs"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7E6568] hover:text-[#241416]"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* Dietary Filter Buttons */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+              {dietaryFilters.map((df) => {
+                const isActive = activeDietaryFilter === df.id;
+                const Icon = df.icon;
+                return (
+                  <button
+                    key={df.id}
+                    type="button"
+                    onClick={() => setActiveDietaryFilter(df.id)}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-sans font-medium transition-all duration-200 cursor-pointer flex-shrink-0 flex items-center gap-1.5 shadow-xs ${
+                      isActive
+                        ? 'bg-[#241416] text-white shadow-sm border border-[#241416]'
+                        : 'bg-white text-[#533B3D] border border-[#E8D9CC] hover:border-[#602E31]'
+                    }`}
+                  >
+                    {df.dot ? (
+                      <span className={`w-2 h-2 rounded-full ${df.dot}`} />
+                    ) : Icon ? (
+                      <Icon className="w-3.5 h-3.5 text-[#C2674F]" />
+                    ) : null}
+                    <span>{df.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── VIDEO DISH GRID (PlatePost Style) ── */}
+        {filteredDishes.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 sm:gap-8 pt-4">
+            {filteredDishes.map((dish) => (
+              <DishCard
+                key={dish.id}
+                dish={dish}
+                onQuickView={(d) => setSelectedQuickViewDish(d)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-3xl border border-[#E8D9CC] p-12 text-center space-y-4 max-w-md mx-auto my-12 shadow-sm">
+            <div className="w-12 h-12 rounded-full bg-[#FAF2EA] text-[#602E31] flex items-center justify-center mx-auto">
+              <Filter className="w-6 h-6" />
+            </div>
+            <h3 className="font-serif text-lg font-bold text-[#241416]">No matching dishes found</h3>
+            <p className="text-xs text-[#7E6568] leading-relaxed">
+              We couldn't find any dishes matching your current search or dietary filters.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveCategory('all');
+                setActiveDietaryFilter('ALL');
+                setSearchQuery('');
+              }}
+              className="px-5 py-2.5 rounded-xl bg-[#602E31] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#4D2326] transition-colors cursor-pointer"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. INTERACTIVE AURA AI SOMMELIER & CONCIERGE SHOWCASE (FUNCTIONALITY) */}
+      {/* ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#241416] via-[#3A181A] to-[#602E31] text-[#FFF5EC] p-8 sm:p-12 lg:p-14 border border-[#602E31]/50 shadow-2xl">
           {/* Ambient Lighting Orbs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#C2674F]/20 blur-[100px] pointer-events-none rounded-full" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#B86268]/20 blur-[90px] pointer-events-none rounded-full" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8B896] text-[10px] font-sans font-bold tracking-[0.25em] uppercase">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#E8B896] text-[10px] font-sans font-bold tracking-[0.25em] uppercase">
                 <Sparkles className="w-3.5 h-3.5 text-[#E8B896]" />
                 <span>Next-Gen Dining Intelligence</span>
               </div>
-              <h2 className="font-luxury text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.08] text-white">
-                Meet Aura.
+              <h2 className="font-luxury text-3xl sm:text-5xl font-bold leading-tight text-white">
+                Need Help Deciding?
                 <br />
                 <span className="gold-gradient-text italic font-normal">
-                  Your AI Gastronomy Concierge.
+                  Ask Aura AI Concierge.
                 </span>
               </h2>
               <p className="text-[#E8D9CC] text-xs sm:text-sm font-light leading-relaxed max-w-xl">
-                Not sure which vintage pairs with wood-fired biryani? Seeking an artisanal 4-course vegetarian journey? Ask Aura to curate your table in real-time, grounded directly in our live kitchen pantry.
+                Not sure which vintage pairs with wood-fired biryani? Seeking an artisanal 4-course vegetarian journey? Tap any inquiry below for real-time recommendations.
               </p>
 
               {/* Quick Interactive Prompt Chips */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-2">
                 <span className="text-[10px] font-mono tracking-widest uppercase text-[#E8B896] font-semibold block">
                   Tap an inquiry to consult Aura right now:
                 </span>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {[
                     { label: '🍷 Recommend a wine pairing', prompt: 'What wine notes pair best with the artisanal Truffle Fries and Biryani?' },
                     { label: '🌶️ Spiciest signature dish', prompt: 'What is the spiciest and most flavorful wood-fired dish on the menu?' },
@@ -261,10 +403,10 @@ export const HomePage: React.FC = () => {
 
             {/* Visual Sommelier Phone Card Mockup */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-xl border border-white/25 p-6 shadow-2xl space-y-4">
-                <div className="flex items-center justify-between border-b border-white/15 pb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#602E31] border border-[#E8B896]/40 flex items-center justify-center">
+              <div className="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-xl border border-white/25 p-5 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between border-b border-white/15 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#602E31] border border-[#E8B896]/40 flex items-center justify-center">
                       <Sparkles className="w-4 h-4 text-[#E8B896]" />
                     </div>
                     <div>
@@ -277,7 +419,7 @@ export const HomePage: React.FC = () => {
                   <span className="text-[10px] font-mono text-[#E8D9CC]/70">v2.4</span>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   <div className="bg-white/5 border border-white/10 p-3 rounded-xl text-[11px] text-[#E8D9CC] leading-relaxed">
                     <p className="font-serif italic text-white/90">
                       "I recommend the <strong className="text-[#E8B896]">Tronx Wood-Fired Biryani</strong> paired with a chilled pomegranate raita and an earthy Pinot Noir to complement the smoldering saffron notes."
@@ -285,13 +427,13 @@ export const HomePage: React.FC = () => {
                   </div>
                   <div className="bg-white/5 border border-white/10 p-3 rounded-xl flex items-center justify-between">
                     <div>
-                      <span className="text-[11px] font-bold text-white block">Truffle Fries</span>
-                      <span className="text-[10px] text-[#E8B896] font-mono">₹280 • Chef's Choice</span>
+                      <span className="text-[11px] font-bold text-white block">Truffle French Fries</span>
+                      <span className="text-[10px] text-[#E8B896] font-mono">₹189 • Chef's Choice</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleAskAuraPrompt('Tell me about the Truffle Fries')}
-                      className="px-3 py-1.5 rounded-lg bg-[#602E31] text-white text-[10px] font-bold uppercase tracking-wider hover:bg-[#4D2326] transition-colors cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-[#602E31] text-white text-[10px] font-bold uppercase tracking-wider hover:bg-[#4D2326] transition-colors cursor-pointer"
                     >
                       Inquire
                     </button>
@@ -301,7 +443,7 @@ export const HomePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleAskAuraPrompt('Hello Aura, recommend something special for me today.')}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#602E31] to-[#4D2326] hover:from-[#4D2326] hover:to-[#3A181A] text-white text-xs font-bold uppercase tracking-widest transition-all shadow-md cursor-pointer border border-[#E8B896]/30 flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#602E31] to-[#4D2326] hover:from-[#4D2326] hover:to-[#3A181A] text-white text-xs font-bold uppercase tracking-widest transition-all shadow-md cursor-pointer border border-[#E8B896]/30 flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#E8B896]" />
                   <span>Open Full Aura Concierge</span>
@@ -313,100 +455,31 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. WHAT ARE YOU IN THE MOOD FOR? (REAL DATABASE DISCOVERY) */}
+      {/* 5. TABLE RESERVATIONS QUICK-BOOKING (FUNCTIONALITY) */}
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-10">
-        <div className="text-center space-y-3 max-w-xl mx-auto">
-          <span className="font-sans text-xs font-bold text-[#602E31] tracking-[0.3em] uppercase block">
-            Sensory Exploration
-          </span>
-          <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
-            What Are You in the Mood For?
-          </h2>
-          <p className="text-[#7E6568] text-xs sm:text-sm font-light leading-relaxed">
-            Navigate our seasonal menu through taste profiles, culinary heat, and botanical inspirations.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {moods.map((mood) => {
-            const MoodIcon = mood.icon;
-            return (
-              <Link
-                key={mood.title}
-                to={mood.href}
-                className="group relative bg-white p-5 rounded-2xl border border-[#E8D9CC] hover:border-[#602E31] transition-all duration-300 flex flex-col items-center text-center space-y-3 shadow-xs hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#FAF2EA] group-hover:bg-[#602E31] text-[#602E31] group-hover:text-[#FFF5EC] flex items-center justify-center transition-colors">
-                  <MoodIcon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-serif text-sm font-bold text-[#241416] group-hover:text-[#602E31] transition-colors leading-tight">
-                    {mood.title}
-                  </h3>
-                  <span className="text-[10px] font-mono text-[#7E6568] mt-1 block font-semibold">
-                    {mood.count} {mood.count === 1 ? 'dish' : 'dishes'}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. SIGNATURE FEATURED DISHES (WITH VIDEO AUTOPLAY) */}
-      {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 pb-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E8D9CC] pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E8D9CC] pb-6">
           <div className="space-y-2">
             <span className="font-sans text-xs font-bold text-[#602E31] tracking-[0.3em] uppercase block">
-              Curated Selections
+              Direct Seating
             </span>
-            <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
-              Signature Harvest Dishes
+            <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#241416]">
+              Reserve Your Table
             </h2>
-            <p className="text-[#7E6568] text-sm font-light max-w-xl">
-              Watch each dish come alive with cinematic video previews and farm-fresh artistry.
+            <p className="text-[#7E6568] text-xs sm:text-sm font-light">
+              Choose your preferred dining salon with live capacity checks and instant booking.
             </p>
           </div>
           <Link
-            to="/menu"
+            to="/reservation"
             className="inline-flex items-center gap-2 text-xs font-bold text-[#602E31] hover:text-[#4D2326] uppercase tracking-widest group"
           >
-            <span>View Full Menu</span>
+            <span>All Reservation Options</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredDishes.map((dish) => (
-            <DishCard
-              key={dish.id}
-              dish={dish}
-              onQuickView={(d) => setSelectedQuickViewDish(d)}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 6. THE TRONX ARCHITECTURAL SANCTUARIES */}
-      {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28 space-y-12">
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="font-sans text-xs font-bold text-[#602E31] tracking-[0.3em] uppercase block">
-            Atmospheric Sanctuaries
-          </span>
-          <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
-            Choose Your Dining Salon
-          </h2>
-          <p className="text-[#7E6568] text-xs sm:text-sm font-light leading-relaxed">
-            Four uniquely sculpted environments tailored for intimate dates, lively celebrations, or private VIP tastings.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {SEATING_SECTIONS.map((sec) => (
             <div
               key={sec.id}
@@ -437,115 +510,8 @@ export const HomePage: React.FC = () => {
                   className="w-full py-2.5 rounded-xl border border-[#E8D9CC] group-hover:border-[#602E31] group-hover:bg-[#602E31] group-hover:text-white text-[#241416] text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5 text-[#C2674F] group-hover:text-white" />
-                  <span>Reserve Space</span>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. EDITORIAL PHILOSOPHY & GASTRONOMY STORYTELLING */}
-      {/* ========================================================================= */}
-      <section className="bg-[#241416] text-[#FFF5EC] py-24 sm:py-32 relative overflow-hidden border-y border-[#3A181A]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(194,103,79,0.18),transparent_60%)] pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <span className="font-sans text-xs font-bold text-[#C2674F] tracking-[0.3em] uppercase block">
-                The Tronx Philosophy
-              </span>
-              <h2 className="font-luxury text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
-                {RESTAURANT_BRAND.storyHeading}
-              </h2>
-              <p className="text-[#E8D9CC] text-sm sm:text-base font-light leading-relaxed">
-                {RESTAURANT_BRAND.storySubheading} At Tronx, dining is approached as an unhurried sensory dialogue. From our morning forage of organic herbs to the smoldering oak logs that season our wood-fired hearths, every plate embodies our devotion to purity, vitality, and mood elevation.
-              </p>
-              <div className="pt-4 flex flex-wrap items-center gap-6">
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#602E31] hover:bg-[#4D2326] text-[#FFF5EC] font-bold text-xs uppercase tracking-widest transition-all cursor-pointer shadow-sm border border-[#C2674F]/40"
-                >
-                  <span>Our Culinary Story</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to="/reservation"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#FFF5EC] hover:text-[#C2674F] uppercase tracking-widest transition-colors"
-                >
                   <span>Reserve Table</span>
-                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
-            </div>
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                  <img
-                    src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop"
-                    alt="Wood-fired craft"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center">
-                  <span className="font-serif text-2xl font-bold text-[#C2674F] block">100%</span>
-                  <span className="text-[10px] uppercase tracking-wider text-[#E8D9CC]">Artisanal Hearth</span>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs text-center">
-                  <span className="font-serif text-2xl font-bold text-[#C2674F] block">Daily</span>
-                  <span className="text-[10px] uppercase tracking-wider text-[#E8D9CC]">Fresh Harvest</span>
-                </div>
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                  <img
-                    src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop"
-                    alt="Plated culinary excellence"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 8. CRITIC ACCOLADES & GASTRONOMY PRAISE */}
-      {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-12">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="font-sans text-xs font-bold text-[#602E31] tracking-[0.3em] uppercase block">
-            Critical Acclaim
-          </span>
-          <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#241416]">
-            Words From The Gastronomy Press
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {accolades.map((item) => (
-            <div
-              key={item.critic}
-              className="bg-white p-8 rounded-3xl border border-[#E8D9CC] flex flex-col justify-between space-y-6 shadow-xs relative hover:border-[#602E31] hover:shadow-md transition-all duration-300"
-            >
-              <Quote className="w-8 h-8 text-[#C2674F]/25" />
-              <div className="space-y-4">
-                <span className="text-xs font-mono tracking-widest uppercase text-[#C2674F] font-bold block">
-                  {item.rating}
-                </span>
-                <p className="font-serif text-sm sm:text-base italic text-[#241416] leading-relaxed">
-                  "{item.quote}"
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#E8D9CC] space-y-0.5">
-                <span className="font-sans text-xs font-bold text-[#241416] block">
-                  {item.critic}
-                </span>
-                <span className="text-[10px] text-[#7E6568] font-sans">
-                  {item.author}
-                </span>
               </div>
             </div>
           ))}
@@ -553,7 +519,7 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 9. COMING SOON CONTINUOUS HORIZONTAL MARQUEE SHOWCASE (RIGHT -> LEFT) */}
+      {/* 6. COMING SOON CONTINUOUS HORIZONTAL MARQUEE SHOWCASE */}
       {/* ========================================================================= */}
       <ComingSoonMarquee
         dishes={dishes}

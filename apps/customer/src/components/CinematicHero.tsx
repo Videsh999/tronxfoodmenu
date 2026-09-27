@@ -41,8 +41,16 @@ export const CinematicHero: React.FC = () => {
     }
   };
 
+  const handleExploreMenu = (e: React.MouseEvent) => {
+    const nextSection = document.getElementById('platepost-video-menu');
+    if (nextSection) {
+      e.preventDefault();
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleScrollDown = () => {
-    const nextSection = document.getElementById('tronx-discovery-start');
+    const nextSection = document.getElementById('platepost-video-menu') || document.getElementById('tronx-discovery-start');
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: 'smooth' });
     } else {
@@ -149,9 +157,10 @@ export const CinematicHero: React.FC = () => {
           {/* Primary CTA: Explore Menu */}
           <Link
             to="/menu"
+            onClick={handleExploreMenu}
             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#602E31] hover:bg-[#4D2326] active:scale-[0.97] text-[#FFF5EC] font-sans font-bold text-xs uppercase tracking-[0.22em] transition-all duration-300 shadow-[0_10px_30px_rgba(96,46,49,0.5)] border border-[#C2674F]/40 flex items-center justify-center gap-2.5 group cursor-pointer min-h-[50px]"
           >
-            <span>Explore Menu</span>
+            <span>Explore Video Menu</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform text-[#E8B896]" />
           </Link>
 
