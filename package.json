@@ -8,12 +8,15 @@
     "dev:customer": "vite --config apps/customer/vite.config.ts",
     "dev:admin": "vite --config apps/admin/vite.config.ts",
     "dev:kitchen": "vite --config apps/kitchen/vite.config.ts",
-    "build": "tsc -b && npm run build:customer && npm run build:admin && npm run build:kitchen",
+    "build": "tsc -b && vite build && npm run build:customer && npm run build:admin && npm run build:kitchen",
     "build:customer": "vite build --config apps/customer/vite.config.ts",
     "build:admin": "vite build --config apps/admin/vite.config.ts",
     "build:kitchen": "vite build --config apps/kitchen/vite.config.ts",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:customer": "vite preview --outDir dist/customer",
+    "preview:admin": "vite preview --outDir dist/admin --port 4174",
+    "preview:kitchen": "vite preview --outDir dist/kitchen --port 4175"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
