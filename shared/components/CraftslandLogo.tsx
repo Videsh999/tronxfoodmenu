@@ -4,12 +4,14 @@ export interface CraftslandLogoProps {
   variant?: 'primary' | 'monogram' | 'light' | 'dark' | 'compact' | 'burgundy' | 'burgundy-invert' | 'navy' | 'teal' | 'green' | 'fresh' | 'green-invert';
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  showSymbol?: boolean;
 }
 
 export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
   variant = 'primary',
   className = '',
   size = 'md',
+  showSymbol = false,
 }) => {
   const sizeMap = {
     sm: { crest: 'w-7 h-7', title: 'text-lg', tag: 'text-[7px]' },
@@ -41,7 +43,7 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
     tagColor = 'text-[#602E31]';
   }
 
-  // Sculpted Moai Monolith Silhouette Emblem directly inspired by the brand reference image
+  // Sculpted Moai Monolith Silhouette Emblem
   const Emblem = (
     <div className={`relative flex items-center justify-center shrink-0 ${sizeMap[size].crest}`}>
       <svg
@@ -50,7 +52,6 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full drop-shadow-xs"
       >
-        {/* Organic rounded stone block */}
         <rect
           x="4"
           y="4"
@@ -59,7 +60,6 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
           rx="15"
           fill={stoneBg}
         />
-        {/* Subtle stone texture perimeter stroke */}
         <rect
           x="5"
           y="5"
@@ -70,8 +70,6 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
           strokeWidth="1"
           strokeOpacity="0.18"
         />
-        {/* Sculpted Profile Negative Space Silhouette */}
-        {/* Eye/Brow, straight sculpted Moai nose, lips, defined jaw and chin */}
         <path
           d="M34 16
              C29 16 26 19 26 23
@@ -88,7 +86,6 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
              C37 18 36 16 34 16Z"
           fill={profileCutout}
         />
-        {/* Monolith Eye Aperture */}
         <circle
           cx="31"
           cy="23"
@@ -110,7 +107,7 @@ export const CraftslandLogo: React.FC<CraftslandLogoProps> = ({
 
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
-      {Emblem}
+      {showSymbol && Emblem}
       <div className="flex flex-col justify-center">
         <span
           className={`font-serif font-bold tracking-[0.22em] leading-none uppercase ${titleColor} ${sizeMap[size].title}`}
